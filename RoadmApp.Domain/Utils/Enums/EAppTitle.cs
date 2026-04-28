@@ -4,7 +4,7 @@ namespace RoadmApp.Domain.Utils.Enums
 {
     public enum EAppTitle
     {
-        [Description("RoadmAPP 🐰")]
+        [Description("RoadmApp 🐰")]
         RoadmAPP = 1,
     }
 }

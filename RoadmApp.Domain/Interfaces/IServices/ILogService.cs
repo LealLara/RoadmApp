@@ -1,8 +1,8 @@
 ﻿using RoadmApp.Domain.Entities;
 
-namespace RoadmApp.Domain.Interfaces.IRepositories
+namespace RoadmApp.Domain.Interfaces.IServices
 {
-    public interface ILogRepository
+    public interface ILogService
     {
         Task<Log> AddLog(Log log);
 

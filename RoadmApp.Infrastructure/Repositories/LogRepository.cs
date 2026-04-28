@@ -1,4 +1,5 @@
-﻿using RoadmApp.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using RoadmApp.Domain.Entities;
 using RoadmApp.Domain.Interfaces.IRepositories;
 using RoadmApp.Infrastructure.Data;
 
@@ -18,6 +19,10 @@ namespace RoadmApp.Infrastructure.Repositories
             await _context.Logs.AddAsync(log);
             await _context.SaveChangesAsync();
             return log;
+        }
+        public async Task<List<Log>> GetLogs()
+        {
+            return await _context.Logs.ToListAsync();
         }
     }
 }

@@ -22,26 +22,37 @@ namespace RoadmApp.Domain.Entities
             Name = name;    
             Birthday = birthday;
         }
-        public void SetPassword(string hash)
+        public string GenerateHash(string password)
         {
-            PasswordHash = hash;
-        }
-        
+            if (string.IsNullOrWhiteSpace(password))
+                throw new ArgumentException("A senha não pode ser nula ou vazia.", nameof(password));
 
+            string? hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
+
+            return hashedPassword;
+        }
+        public string SetPassword(string password)
+        {
+            if (string.IsNullOrWhiteSpace(password))
+                throw new ArgumentException("Password cannot be null or empty.", nameof(password));
+
+            PasswordHash = GenerateHash(password);
+            return PasswordHash;
+        }
         public User Transform(Register register)
         {
-            return new ()
+            return new()
             {
                 Name = register.User.Name,
                 Birthday = register.User.Birthday,
-                Nickname = register.User.Nickname,
-                PasswordHash = register.Access.Password,
+                Nickname = register.Access.Nickname,
+                PasswordHash = SetPassword(register.Access.Password),
                 Contacts = register.Contacts,
             };
         }
         public User TransformResult()
         {
-            return new ()
+            return new()
             {
                 Name = Name,
                 Birthday = Birthday
