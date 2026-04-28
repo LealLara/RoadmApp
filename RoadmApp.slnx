@@ -1,6 +1,6 @@
 <Solution>
-  <Folder Name="/Solution Items/">
-    <File Path="README.txt" />
-  </Folder>
   <Project Path="RoadmApp.Api/RoadmApp.Api.csproj" />
+  <Project Path="RoadmApp.CrossCutting/RoadmApp.CrossCutting.csproj" />
+  <Project Path="RoadmApp.Domain/RoadmApp.Domain.csproj" />
+  <Project Path="RoadmApp.Infrastructure/RoadmApp.Infrastructure.csproj" />
 </Solution>
