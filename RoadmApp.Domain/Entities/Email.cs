@@ -11,14 +11,17 @@ namespace RoadmApp.Domain.Entities
         public int EmailType { get; private set; }
 
         public Email() { }
-
-
-        //string to, string subject, string body)
+         
         public Email(string emailAddress, string header, string emailBody, EEmailType emailType)
         {
             EmailAddress = emailAddress;
             Header = header;
             EmailBody = emailBody;
+            EmailType = (int)emailType;
+        }
+        public Email(string emailAddress, EEmailType emailType)
+        {
+            EmailAddress = emailAddress;  
             EmailType = (int)emailType;
         }
     }

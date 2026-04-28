@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace RoadmApp.Domain.Utils.Enums
 {
@@ -11,5 +10,7 @@ namespace RoadmApp.Domain.Utils.Enums
         FirstRegister = 2,
         [Description("Password Reset")]
         PasswordReset = 3,
+        [Description("Poesia de amor")]
+        BloomingLove = 4,
     }
 }

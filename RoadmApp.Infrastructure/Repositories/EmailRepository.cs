@@ -17,7 +17,7 @@ namespace RoadmApp.Infrastructure.Repositories
             string password = EmailSenderPassword.RoadmAppPassword; 
 
 
-            SmtpClient smtp = new("smtp.gmail.com", 587)
+            SmtpClient smtp = new (EmailConfiguration.SmtpConfigurationHost, EmailConfiguration.SmtpConfigurationPort)
             {
                 Credentials = new NetworkCredential(
                    emailSender,
@@ -39,5 +39,11 @@ namespace RoadmApp.Infrastructure.Repositories
             mail.To.Add(body.EmailAddress);
             await smtp.SendMailAsync(mail);
         }
+
+        public async Task<List<EEmailType>> GetEmailTyes()
+        {
+            return await Task.FromResult(Enum.GetValues(typeof(EEmailType)).Cast<EEmailType>().ToList());
+             
+        }   
     }
 }
