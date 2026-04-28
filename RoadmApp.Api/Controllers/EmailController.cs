@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RoadmApp.Domain.Interfaces.IServices;
 using RoadmApp.Domain.Services;
 
@@ -13,6 +14,7 @@ namespace RoadmApp.Api.Controllers
         {
             _emailService = emailService;
         }
+        [Authorize]
         [HttpPost("send-email")]
         public async Task<IActionResult> SendEmail([FromQuery] EmailDto emailDto)
         {
@@ -26,6 +28,7 @@ namespace RoadmApp.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+        [Authorize]
         [HttpGet("get-all")]
         public async Task<IActionResult> GetEmailTyes()
         {

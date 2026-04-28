@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RoadmApp.Domain.Entities;
 using RoadmApp.Domain.Interfaces.IServices;
 
@@ -15,6 +16,7 @@ namespace RoadmApp.Api.Controllers
             _logService = logService;
         }
 
+        [Authorize]
         [HttpGet("get-logs")]
         public async Task<IActionResult> GetLogs()
         {
