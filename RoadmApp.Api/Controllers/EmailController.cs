@@ -30,7 +30,7 @@ namespace RoadmApp.Api.Controllers
             }
         }
 
-        [HttpGet("get-all")]
+        [HttpGet("get-all-email-types")]
         public async Task<IActionResult> GetEmailTyes()
         {
             try
