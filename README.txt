@@ -7,3 +7,4 @@ cuidado com o Swashbuckle.AspNetCore usa version 6.5.0
 Microsoft.EntityFrameworkCore.Tools
 Microsoft.EntityFrameworkCore.Sqlite
 Microsoft.AspNetCore.Authentication.JwtBearer
+Desenvolvida utilizando C# e .NET 8.0, com arquitetura MVC e Entity Framework Core para gerenciamento de dados. O projeto é open-source e está disponível para contribuições e feedbacks.
