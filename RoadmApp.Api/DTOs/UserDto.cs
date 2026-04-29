@@ -1,4 +1,4 @@
-﻿using RoadmApp.Domain.Entities;
+﻿using RoadmApp.Domain.Models;
 
 namespace RoadmApp.Api.DTOs
 {
@@ -7,7 +7,7 @@ namespace RoadmApp.Api.DTOs
         public string Name { get; set; } = string.Empty;
         public DateTime Birthday { get; set; } = DateTime.Today;
 
-        public User Transform()
+        public UserModel Transform()
         {
             return new(
                 name: Name,

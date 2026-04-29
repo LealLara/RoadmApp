@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RoadmApp.Domain.Entities;
+using RoadmApp.Domain.Factories;
 using RoadmApp.Domain.Interfaces.IRepositories;
+using RoadmApp.Domain.Models;
 using RoadmApp.Infrastructure.Data;
 
 namespace RoadmApp.Infrastructure.Repositories
@@ -15,11 +17,12 @@ namespace RoadmApp.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<User?> GetByNicknameAsync(string nick)
+        public async Task<UserModel?> GetByNicknameAsync(string nick)
         {
             try
             {
-                return await _context.Users.FirstOrDefaultAsync(u => u.Nickname == nick);
+                var userEntity = await _context.Users.FirstOrDefaultAsync(u => u.Nickname == nick);
+                return userEntity != null ? ModelFactory.CreateUserModel(userEntity) : null;
             }
             catch (Exception ex)
             {
@@ -27,11 +30,12 @@ namespace RoadmApp.Infrastructure.Repositories
             }
         }
 
-        public async Task<User> GetByIdAsync(int id)
+        public async Task<UserModel?> GetByIdAsync(int id)
         {
             try
             {
-                return await _context.Set<User>().FindAsync(id);
+                var userEntity = await _context.Set<UserEntity>().FindAsync(id);
+                return userEntity != null ? ModelFactory.CreateUserModel(userEntity) : null;
             }
             catch (Exception ex)
             {
@@ -39,13 +43,13 @@ namespace RoadmApp.Infrastructure.Repositories
             }
         }
 
-        public async Task<User> AddAsync(User user)
+        public async Task<UserModel?> AddAsync(UserEntity user)
         {
             try
             {
                 await _context.Users.AddAsync(user);
                 await _context.SaveChangesAsync();
-                return user;
+                return ModelFactory.CreateUserModel(user);
             }
             catch (Exception ex)
             {

@@ -5,10 +5,11 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace RoadmApp.CrossCutting.Security
+namespace RoadmApp.Infrastructure.Repositories
 {
     public class TokenRepository : ITokenRepository
     {
+
         private readonly string _key;
 
         public TokenRepository(IConfiguration config)

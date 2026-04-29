@@ -16,9 +16,9 @@ namespace RoadmApp.Domain.Services
             _emailRepository = emailRepository;
         }
 
-        public async Task<List<EmailTypes>> GetEmailTyes()
+        public async Task<List<EmailTypeModel>> GetEmailTyes()
         {
-            List<EmailTypes> types = new();
+            List<EmailTypeModel> types = new();
             List<EEmailType> data = await _emailRepository.GetEmailTyes(); 
 
             if(data == null)
@@ -26,7 +26,7 @@ namespace RoadmApp.Domain.Services
 
             foreach (var item in data) 
             {
-                EmailTypes emailType = new()
+                EmailTypeModel emailType = new()
                 {
                     Id = (int)item,
                     Description = item.GetDescription()
@@ -36,9 +36,9 @@ namespace RoadmApp.Domain.Services
             return types;
         }
 
-        public async Task SendAsync(Email data)
+        public async Task SendAsync(EmailModel data)
         {
-            Email emailBody = new();
+            EmailEntity emailBody = new();
 
             string head = ((EEmailType)data.EmailType).GetDescription();
             string text = EmailTemplates.GetTemplate((EEmailType)data.EmailType);

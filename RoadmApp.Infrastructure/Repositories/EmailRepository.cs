@@ -10,7 +10,7 @@ namespace RoadmApp.Infrastructure.Repositories
 {
     public class EmailRepository : IEmailRepository
     {
-        public async Task SendAsync(Email body) 
+        public async Task SendAsync(EmailEntity body) 
         {
 
             string emailSender = EEmailSender.RoadmApp.GetDescription(); 

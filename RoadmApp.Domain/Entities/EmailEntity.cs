@@ -2,7 +2,7 @@
 
 namespace RoadmApp.Domain.Entities
 {
-    public class Email
+    public class EmailEntity
     {
         public int EmailId { get; private set; }
         public string EmailAddress { get; private set; } = string.Empty;
@@ -10,16 +10,16 @@ namespace RoadmApp.Domain.Entities
         public string EmailBody { get; private set; } = string.Empty;
         public int EmailType { get; private set; }
 
-        public Email() { }
+        public EmailEntity() { }
          
-        public Email(string emailAddress, string header, string emailBody, EEmailType emailType)
+        public EmailEntity(string emailAddress, string header, string emailBody, EEmailType emailType)
         {
             EmailAddress = emailAddress;
             Header = header;
             EmailBody = emailBody;
             EmailType = (int)emailType;
         }
-        public Email(string emailAddress, EEmailType emailType)
+        public EmailEntity(string emailAddress, EEmailType emailType)
         {
             EmailAddress = emailAddress;  
             EmailType = (int)emailType;

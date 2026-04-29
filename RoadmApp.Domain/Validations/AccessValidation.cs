@@ -1,9 +1,10 @@
 ﻿using FluentValidation;
 using RoadmApp.Domain.Entities;
+using RoadmApp.Domain.Models;
 
 namespace RoadmApp.Domain.Validations
 {
-    public class AccessValidation : AbstractValidator<Access>
+    public class AccessValidation : AbstractValidator<AccessModel>
     {
         public AccessValidation()
         {

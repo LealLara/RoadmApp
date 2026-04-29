@@ -3,7 +3,7 @@ using RoadmApp.Domain.Models;
 
 namespace RoadmApp.Domain.Validations
 {
-    public class CreateAccessValidation : AbstractValidator<Register>
+    public class CreateAccessValidation : AbstractValidator<RegisterModel>
     {
         public CreateAccessValidation()
         {
@@ -14,12 +14,7 @@ namespace RoadmApp.Domain.Validations
             RuleFor(x => x.User)
                 .NotNull().WithMessage("User é obrigatório.")
                 .SetValidator(new UserValidation());
-
-            RuleFor(x => x.ConfirmPassword)
-                .NotEmpty().WithMessage("Confirmação de senha é obrigatória.")
-                .Equal(x => x.Access.Password)
-                .WithMessage("As senhas não coincidem.");
-
+             
             RuleFor(x => x.Contacts)
                 .NotNull().WithMessage("Lista de contatos é obrigatória.")
                 .Must(x => x.Any())

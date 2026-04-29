@@ -4,18 +4,16 @@ namespace RoadmApp.Api.DTOs
 {
     public class RegisterDto
     { 
-        public AccessDto Access { get; set; } = new ();       
-        public UserDto User { get; set; } = new ();       
-        public string ConfirmPassword { get; set; } = string.Empty;
+        public AccessFirstRegisterDto Access { get; set; } = new ();       
+        public UserDto User { get; set; } = new ();        
        public List<ContactDto> Contacts { get; set; } = new List<ContactDto>();     
         
-        public Register Transform()
+        public RegisterModel Transform()
         {
             return new()
             {
                 Access = Access.Transform(),
-                User = User.Transform(),
-                ConfirmPassword = ConfirmPassword,
+                User = User.Transform(), 
                 Contacts = Contacts.Select(c => c.Transform()).ToList()
             };
         }

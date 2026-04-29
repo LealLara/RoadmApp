@@ -5,7 +5,7 @@ namespace RoadmApp.Domain.Interfaces.IRepositories
 {
     public interface IEmailRepository
     {
-        Task SendAsync(Email body);
+        Task SendAsync(EmailEntity body);
         Task<List<EEmailType>> GetEmailTyes();
     }
 }

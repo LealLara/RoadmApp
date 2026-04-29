@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RoadmApp.Domain.Entities
 {
-    internal class Login
+    internal class LoginEntity
     {
     }
 }

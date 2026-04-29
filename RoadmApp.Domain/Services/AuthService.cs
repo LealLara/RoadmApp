@@ -23,7 +23,7 @@ namespace RoadmApp.Domain.Services
             if (user == null || !BCrypt.Net.BCrypt.Verify(password, user.PasswordHash))
                 throw new Exception("Credenciais inválidas");
 
-            Log logBody = new(logMessage: $"Usuário logou no sistema: {user.Nickname}",
+            LogEntity logBody = new(logMessage: $"Usuário logou no sistema: {user.Nickname}",
                            logTypeId: (int)ELogType.Login,
                            userId: user.UserId
         );

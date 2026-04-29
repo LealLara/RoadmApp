@@ -23,9 +23,49 @@ namespace RoadmApp.Domain.Services
             _logRepository = logRepository;
         }
 
-        public async Task<User> CreateAccess(Register data)
+        public async Task<SuccessModel> CreateAccess(RegisterModel data)
         {
-            Email emailBody = new();
+            CreateAccessValidation valid = new();
+            LogModel logBody = new();
+            SuccessModel successResult = new();
+
+            valid.ValidateAndThrow(data);
+
+            UserModel existing = await _userRepository.GetByNicknameAsync(data.Access.Nickname);
+            if (existing is not null)
+            {
+                return successResult = new()
+                {
+                    Success = false,
+                    Message = "Nickname já cadastrado"
+                };
+            }
+            string head = EEmailType.Welcome.GetDescription();
+            string text = BildBody_CreateAccess();
+
+
+            UserModel createdUser = await _userRepository.AddAsync(new UserEntity().TransformToUserEntity(data));
+
+            if (createdUser != null)
+            {
+                EmailModel emailBody = new(emailAddress: data.Contacts.FirstOrDefault(c => c.Email != null)?.Email, header: head, emailBody: text, emailType: EEmailType.Welcome);
+
+                await _emailService.SendAsync(emailBody);
+            }
+
+
+            logBody = await _logRepository.AddLog(new LogEntity().CreateAccessLogAndTransform(createdUser.Nickname, createdUser.UserId));
+
+            successResult = new(
+                success: true,
+                message: "Usuário criado com sucesso",
+                logId: logBody.LogId,
+                data: new List<object> { createdUser }
+            );
+
+            return successResult;
+
+            /*Email emailBody = new();
             CreateAccessValidation valid = new();
             User newUser = new();
             User createdUser = new();
@@ -54,8 +94,8 @@ namespace RoadmApp.Domain.Services
 
             await _logRepository.AddLog(logBody);
 
-            return createdUser;
-        } 
+            return createdUser;*/
+        }
 
         private static string BildBody_CreateAccess()
         {

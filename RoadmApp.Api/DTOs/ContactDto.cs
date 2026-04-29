@@ -1,4 +1,4 @@
-﻿using RoadmApp.Domain.Entities;
+﻿using RoadmApp.Domain.Models;
 
 namespace RoadmApp.Api.DTOs
 {
@@ -8,7 +8,7 @@ namespace RoadmApp.Api.DTOs
         public bool FlagWhatsApp { get; set; } = true;
         public string Email { get; set; } = string.Empty;
 
-        public Contact Transform()
+        public ContactModel Transform()
         {
             return new(
                 email: Email,

@@ -5,9 +5,9 @@ namespace RoadmApp.Infrastructure.Data
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<User> Users => Set<User>();
-        public DbSet<Log> Logs => Set<Log>();
-        public DbSet<LogType> LogTypes => Set<LogType>();
+        public DbSet<UserEntity> Users => Set<UserEntity>();
+        public DbSet<LogEntity> Logs => Set<LogEntity>();
+        public DbSet<LogTypeEntity> LogTypes => Set<LogTypeEntity>();
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options) { }

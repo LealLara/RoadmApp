@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RoadmApp.Domain.Entities;
 using RoadmApp.Domain.Interfaces.IServices;
+using RoadmApp.Domain.Models;
 
 namespace RoadmApp.Api.Controllers
 {
@@ -22,7 +23,7 @@ namespace RoadmApp.Api.Controllers
         {
             try
             {
-                List<Log> logs = await _logService.GetLogs();
+                List<LogModel> logs = await _logService.GetLogs();
                 return Ok(logs);
             }
             catch (Exception ex)

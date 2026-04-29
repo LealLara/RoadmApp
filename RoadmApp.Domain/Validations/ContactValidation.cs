@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
-using RoadmApp.Domain.Entities;
+using RoadmApp.Domain.Models;
 
 namespace RoadmApp.Domain.Validations
 {
-    public class ContactValidation : AbstractValidator<Contact>
+    public class ContactValidation : AbstractValidator<ContactModel>
     {
         public ContactValidation()
         {
@@ -11,12 +11,12 @@ namespace RoadmApp.Domain.Validations
                 .NotEmpty().WithMessage("Email é obrigatório.")
                 .EmailAddress().WithMessage("Email inválido.");
 
-            RuleFor(x => x.Cellphone)
+            /*RuleFor(x => x.Cellphone)
                 .NotEmpty().WithMessage("Celular é obrigatório.")
                 .Matches(@"^\d+$")
                 .WithMessage("Celular deve conter apenas números.")
                 .MinimumLength(9)
-                .WithMessage("Celular inválido.");
+                .WithMessage("Celular inválido.");*/
         }
     }
 }

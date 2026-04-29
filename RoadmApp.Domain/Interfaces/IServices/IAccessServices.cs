@@ -5,6 +5,6 @@ namespace RoadmApp.Domain.Interfaces.IServices
 {
     public interface IAccessService
     {
-        Task<User> CreateAccess(Register data);
+        Task<SuccessModel> CreateAccess(RegisterModel data);
     }
 }

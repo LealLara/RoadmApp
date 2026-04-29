@@ -1,11 +1,12 @@
 ﻿using RoadmApp.Domain.Entities;
+using RoadmApp.Domain.Models;
 
 namespace RoadmApp.Domain.Interfaces.IServices
 {
     public interface ILogService
     {
-        Task<Log> AddLog(Log log);
+        Task<LogModel> AddLog(LogEntity log);
 
-        Task<List<Log>> GetLogs();
+        Task<List<LogModel>> GetLogs();
     }
 }

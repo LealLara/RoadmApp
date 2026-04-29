@@ -1,17 +1,18 @@
 ﻿using RoadmApp.Domain.Models;
+using RoadmApp.Domain.Utils.Contants;
 
 namespace RoadmApp.Api.DTOs
 {
-    public class AccessDto
+    public class AccessFirstRegisterDto
     {
-        public string Nickname { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
+
+        public string Nickname { get; set; } = string.Empty; 
 
         public AccessModel Transform()
         {
             return new(
                 nickname: Nickname,
-                password: Password
+                password: PatternAccountConfig.PatternFirstRegister
             );
         }
     }
