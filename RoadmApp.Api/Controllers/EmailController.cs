@@ -5,6 +5,7 @@ using RoadmApp.Domain.Services;
 
 namespace RoadmApp.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class EmailController : ControllerBase
@@ -13,8 +14,8 @@ namespace RoadmApp.Api.Controllers
         public EmailController(IEmailService emailService)
         {
             _emailService = emailService;
-        }
-        [Authorize]
+        } 
+
         [HttpPost("send-email")]
         public async Task<IActionResult> SendEmail([FromQuery] EmailDto emailDto)
         {
@@ -28,7 +29,7 @@ namespace RoadmApp.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
-        [Authorize]
+
         [HttpGet("get-all")]
         public async Task<IActionResult> GetEmailTyes()
         {

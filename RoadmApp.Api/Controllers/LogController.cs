@@ -5,6 +5,7 @@ using RoadmApp.Domain.Interfaces.IServices;
 
 namespace RoadmApp.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class LogController : ControllerBase 
@@ -16,7 +17,6 @@ namespace RoadmApp.Api.Controllers
             _logService = logService;
         }
 
-        [Authorize]
         [HttpGet("get-logs")]
         public async Task<IActionResult> GetLogs()
         {
