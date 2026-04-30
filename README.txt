@@ -1,23 +1,23 @@
-<h1 align="center">RoadmApp</h1>
+<h1 align="center">Roadmapp</h1>
 
 <p align="center">
-  Aplicação web para gerenciamento de estudos, tarefas e metas, com foco em produtividade e organização pessoal.
+  Aplicação web para gerenciamento de estudos, tarefas e metas, com foco em produtividade, organização e escalabilidade.
 </p>
 
 <hr/>
 
 <h2>Overview</h2>
 <p>
-O Study Organizer App é uma aplicação desenvolvida com foco em boas práticas de arquitetura e organização de código,
-permitindo ao usuário gerenciar sua rotina de estudos de forma estruturada. O projeto encontra-se em fase inicial,
-com evolução contínua baseada em extensibilidade e manutenção.
+O Roadmapp é uma aplicação em desenvolvimento com foco em organização de estudos e produtividade pessoal.
+O projeto é estruturado com base em princípios de <strong>Domain-Driven Design (DDD)</strong>, priorizando separação de responsabilidades,
+manutenibilidade e evolução contínua.
 </p>
 
 <h2>Current Features</h2>
 <ul>
   <li>Gerenciamento de tarefas com agenda integrada</li>
-  <li>Quadros estilo Kanban para organização de atividades</li>
-  <li>Sistema de flashcards para revisão de conteúdo</li>
+  <li>Quadros estilo Kanban</li>
+  <li>Sistema de flashcards para revisão</li>
   <li>Envio de e-mails com templates pré-definidos</li>
   <li>Registro de logs de operação</li>
   <li>Autenticação e autorização via JWT</li>
@@ -26,37 +26,60 @@ com evolução contínua baseada em extensibilidade e manutenção.
 <h2>Tech Stack</h2>
 <ul>
   <li><strong>Backend:</strong> C# / .NET 8.0</li>
-  <li><strong>Framework:</strong> ASP.NET MVC</li>
+  <li><strong>Framework:</strong> ASP.NET</li>
   <li><strong>ORM:</strong> Entity Framework Core</li>
   <li><strong>Database:</strong> SQLite</li>
   <li><strong>Authentication:</strong> JWT Bearer</li>
 </ul>
 
+<h2>Architecture</h2>
+<p>
+A aplicação segue uma abordagem baseada em <strong>DDD (Domain-Driven Design)</strong>, organizada em camadas bem definidas:
+</p>
+
+<h3>Domain Layer</h3>
+<ul>
+  <li>Entidades de negócio</li>
+  <li>Value Objects</li>
+  <li>Interfaces de repositório</li>
+  <li>Regras de negócio centrais</li>
+</ul>
+
+<h3>Application Layer</h3>
+<ul>
+  <li>Serviços de aplicação</li>
+  <li>DTOs (Data Transfer Objects)</li>
+  <li>Validações com FluentValidation</li>
+  <li>Orquestração dos casos de uso</li>
+</ul>
+
+<h3>Infrastructure Layer</h3>
+<ul>
+  <li>Implementação de repositórios</li>
+  <li>Configuração do Entity Framework Core</li>
+  <li>Persistência com SQLite</li>
+  <li>Serviços externos (ex: envio de e-mail)</li>
+</ul>
+
+<h3>Presentation Layer</h3>
+<ul>
+  <li>Controllers (API / MVC)</li>
+  <li>Endpoints HTTP</li>
+  <li>Autenticação e autorização</li>
+</ul>
+
 <h2>NuGet Packages</h2>
 <ul>
-  <li>BCrypt.Net-Next (password hashing)</li>
-  <li>FluentValidation (input validation)</li>
+  <li>BCrypt.Net-Next</li>
+  <li>FluentValidation</li>
   <li>Microsoft.EntityFrameworkCore.Tools</li>
   <li>Microsoft.EntityFrameworkCore.Sqlite</li>
   <li>Microsoft.AspNetCore.Authentication.JwtBearer</li>
 </ul>
 
 <p>
-<strong>Note:</strong> Utilize <code>Swashbuckle.AspNetCore</code> na versão <strong>6.5.0</strong> para compatibilidade com a documentação da API.
+<strong>Note:</strong> Utilizar <code>Swashbuckle.AspNetCore</code> na versão <strong>6.5.0</strong> para compatibilidade com Swagger/OpenAPI.
 </p>
-
-<h2>Architecture</h2>
-<p>
-A aplicação segue o padrão <strong>MVC (Model-View-Controller)</strong>, com separação clara de responsabilidades.
-A camada de dados é gerenciada pelo <strong>Entity Framework Core</strong>, utilizando abordagem code-first.
-</p>
-
-<ul>
-  <li>Controllers responsáveis pela orquestração das requisições</li>
-  <li>Models representando entidades e regras de negócio</li>
-  <li>Validações desacopladas com FluentValidation</li>
-  <li>Persistência com EF Core e SQLite</li>
-</ul>
 
 <h2>Security</h2>
 <ul>
@@ -68,17 +91,17 @@ A camada de dados é gerenciada pelo <strong>Entity Framework Core</strong>, uti
 <h2>Project Goals</h2>
 <ul>
   <li>Evoluir para uma aplicação completa de produtividade</li>
-  <li>Aplicar boas práticas de arquitetura (Clean Architecture / DDD futuramente)</li>
-  <li>Escalabilidade e fácil manutenção</li>
+  <li>Aplicar padrões avançados (Clean Architecture, DDD estratégico)</li>
+  <li>Garantir escalabilidade e baixo acoplamento</li>
 </ul>
 
 <h2>Contributing</h2>
 <p>
-Este projeto é open-source e aberto a contribuições. Sugestões, issues e pull requests são bem-vindos.
+Este projeto é open-source. Contribuições são bem-vindas através de issues e pull requests.
 </p>
 
 <hr/>
 
 <p align="center">
-  Desenvolvido com foco em qualidade de código, boas práticas e evolução contínua.
+  Projeto desenvolvido com foco em boas práticas de arquitetura, código limpo e evolução contínua.
 </p>
