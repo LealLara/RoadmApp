@@ -1,107 +1,209 @@
-<h1 align="center">Roadmapp</h1>
+<h1 align="center">RoadmApp</h1>
 
 <p align="center">
-  Aplicação web para gerenciamento de estudos, tarefas e metas, com foco em produtividade, organização e escalabilidade.
+Aplicação web para gerenciamento de estudos, tarefas e metas, com foco em produtividade, organização e escalabilidade.
 </p>
 
-<hr/>
+---
 
-<h2>Overview</h2>
-<p>
-O Roadmapp é uma aplicação em desenvolvimento com foco em organização de estudos e produtividade pessoal.
-O projeto é estruturado com base em princípios de <strong>Domain-Driven Design (DDD)</strong>, priorizando separação de responsabilidades,
-manutenibilidade e evolução contínua.
-</p>
+## Overview
 
-<h2>Current Features</h2>
-<ul>
-  <li>Gerenciamento de tarefas com agenda integrada</li>
-  <li>Quadros estilo Kanban</li>
-  <li>Sistema de flashcards para revisão</li>
-  <li>Envio de e-mails com templates pré-definidos</li>
-  <li>Registro de logs de operação</li>
-  <li>Autenticação e autorização via JWT</li>
-</ul>
+O **RoadmApp** é uma aplicação desenvolvida com foco em boas práticas de arquitetura e organização de código, permitindo ao usuário gerenciar sua rotina de estudos de forma estruturada.
 
-<h2>Tech Stack</h2>
-<ul>
-  <li><strong>Backend:</strong> C# / .NET 8.0</li>
-  <li><strong>Framework:</strong> ASP.NET</li>
-  <li><strong>ORM:</strong> Entity Framework Core</li>
-  <li><strong>Database:</strong> SQLite</li>
-  <li><strong>Authentication:</strong> JWT Bearer</li>
-</ul>
+O projeto segue princípios de **Domain-Driven Design (DDD)**, priorizando separação de responsabilidades, baixo acoplamento e alta manutenibilidade, com evolução contínua para uma arquitetura mais robusta.
 
-<h2>Architecture</h2>
-<p>
-A aplicação segue uma abordagem baseada em <strong>DDD (Domain-Driven Design)</strong>, organizada em camadas bem definidas:
-</p>
+---
 
-<h3>Domain Layer</h3>
-<ul>
-  <li>Entidades de negócio</li>
-  <li>Value Objects</li>
-  <li>Interfaces de repositório</li>
-  <li>Regras de negócio centrais</li>
-</ul>
+## Current Features
 
-<h3>Application Layer</h3>
-<ul>
-  <li>Serviços de aplicação</li>
-  <li>DTOs (Data Transfer Objects)</li>
-  <li>Validações com FluentValidation</li>
-  <li>Orquestração dos casos de uso</li>
-</ul>
+- Gerenciamento de tarefas com agenda integrada  
+- Quadros estilo Kanban para organização de atividades  
+- Sistema de flashcards para revisão de conteúdo  
+- Envio de e-mails com templates pré-definidos  
+- Registro de logs de operação  
+- Autenticação e autorização via JWT  
 
-<h3>Infrastructure Layer</h3>
-<ul>
-  <li>Implementação de repositórios</li>
-  <li>Configuração do Entity Framework Core</li>
-  <li>Persistência com SQLite</li>
-  <li>Serviços externos (ex: envio de e-mail)</li>
-</ul>
+---
 
-<h3>Presentation Layer</h3>
-<ul>
-  <li>Controllers (API / MVC)</li>
-  <li>Endpoints HTTP</li>
-  <li>Autenticação e autorização</li>
-</ul>
+## Tech Stack
 
-<h2>NuGet Packages</h2>
-<ul>
-  <li>BCrypt.Net-Next</li>
-  <li>FluentValidation</li>
-  <li>Microsoft.EntityFrameworkCore.Tools</li>
-  <li>Microsoft.EntityFrameworkCore.Sqlite</li>
-  <li>Microsoft.AspNetCore.Authentication.JwtBearer</li>
-</ul>
+- **Backend:** C# / .NET 8.0  
+- **Framework:** ASP.NET MVC  
+- **ORM:** Entity Framework Core  
+- **Database:** SQLite  
+- **Authentication:** JWT Bearer  
 
-<p>
-<strong>Note:</strong> Utilizar <code>Swashbuckle.AspNetCore</code> na versão <strong>6.5.0</strong> para compatibilidade com Swagger/OpenAPI.
-</p>
+---
 
-<h2>Security</h2>
-<ul>
-  <li>Autenticação baseada em JWT</li>
-  <li>Hash de senhas com BCrypt</li>
-  <li>Proteção de rotas via Authorization</li>
-</ul>
+## Project Structure
+Roadmapp.sln
 
-<h2>Project Goals</h2>
-<ul>
-  <li>Evoluir para uma aplicação completa de produtividade</li>
-  <li>Aplicar padrões avançados (Clean Architecture, DDD estratégico)</li>
-  <li>Garantir escalabilidade e baixo acoplamento</li>
-</ul>
+src/
+├── RoadmApp.Api/
+│ ├── Controllers/
+│ ├── DTOs/
+│ ├── Models/
+│ └── Configurations/
+│
+├── RoadmApp.Domain/
+│ ├── Entities/
+│ ├── Interfaces/
+│ │ ├── IRepositories/
+│ │ └── IServices/
+│ ├── Services/
+│ ├── Enums/
+│ ├── Constants/
+│ └── Validations/
+│
+├── RoadmApp.Infrastructure/
+│ ├── Data/
+│ │ └── AppDbContext.cs
+│ └── Repositories/
+│
+├── RoadmApp.CrossCutting/
+│ └── Security/
+│ └── TokenRepository.cs
 
-<h2>Contributing</h2>
-<p>
-Este projeto é open-source. Contribuições são bem-vindas através de issues e pull requests.
-</p>
 
-<hr/>
+---
+
+## Architecture
+
+A aplicação segue uma abordagem baseada em **DDD (Domain-Driven Design)**, organizada da seguinte forma:
+
+### Domain
+- Entidades de negócio  
+- Interfaces de repositório e serviços  
+- Regras de negócio  
+- Validações e enums  
+
+### Infrastructure
+- Implementação de repositórios  
+- Configuração do Entity Framework Core  
+- Persistência com SQLite  
+
+### Presentation (API)
+- Controllers  
+- DTOs  
+- Entrada e saída de requisições HTTP  
+
+### CrossCutting
+- Autenticação JWT  
+- Configurações de segurança  
+
+---
+
+## Application Layer (Current State)
+
+A camada de aplicação ainda não está isolada como um projeto separado.
+
+Atualmente, suas responsabilidades estão distribuídas entre:
+
+- Controllers (orquestração inicial)
+- DTOs (transferência de dados)
+- Services no Domain (regras + fluxo simplificado)
+
+---
+
+## Request Flow
+
+
+HTTP Request
+↓
+Controller (API)
+↓
+Domain Service
+↓
+Repository Interface (Domain)
+↓
+Repository Implementation (Infrastructure)
+↓
+Database (SQLite via EF Core)
+
+
+---
+
+## NuGet Packages
+
+- BCrypt.Net-Next (password hashing)  
+- FluentValidation (input validation)  
+- Microsoft.EntityFrameworkCore.Tools  
+- Microsoft.EntityFrameworkCore.Sqlite  
+- Microsoft.AspNetCore.Authentication.JwtBearer  
+
+**Nota:** Utilizar `Swashbuckle.AspNetCore` na versão **6.5.0** para compatibilidade com Swagger/OpenAPI.
+
+---
+
+## Security
+
+- Autenticação baseada em JWT  
+- Hash de senhas com BCrypt  
+- Proteção de rotas via Authorization  
+
+---
+
+## Production Readiness
+
+| Item                    | Status        |
+|-------------------------|--------------|
+| Autenticação JWT        | Implementado |
+| Validação de dados      | Implementado |
+| Logging                 | Implementado |
+| Arquitetura em camadas  | Em evolução  |
+
+---
+
+## Architecture Evolution
+
+A estrutura atual segue um modelo DDD simplificado.
+
+Evoluções planejadas:
+
+- Isolar a camada **Application** em projeto próprio  
+- Implementar padrão **UseCase (Command/Query)**  
+- Reduzir responsabilidades dos Controllers  
+- Melhorar separação entre regras de negócio e orquestração  
+
+---
+
+## Technical Roadmap
+
+### Curto prazo
+- Implementar testes unitários (Domain)  
+- Melhorar tratamento global de exceções  
+- Padronizar respostas da API  
+- Finalizar documentação Swagger  
+
+### Médio prazo
+- Criar camada Application separada  
+- Implementar testes de integração  
+- Introduzir CQRS  
+- Melhorar logging  
+
+### Longo prazo
+- Migrar para PostgreSQL  
+- Implementar mensageria (RabbitMQ)  
+- Adicionar autenticação externa (OAuth)  
+- Deploy em ambiente cloud  
+
+---
+
+## Project Goals
+
+- Evoluir para uma aplicação completa de produtividade  
+- Aplicar Clean Architecture + DDD completo  
+- Garantir escalabilidade e fácil manutenção  
+
+---
+
+## Contributing
+
+Este projeto é open-source e aberto a contribuições.  
+Sugestões, issues e pull requests são bem-vindos.
+
+---
 
 <p align="center">
-  Projeto desenvolvido com foco em boas práticas de arquitetura, código limpo e evolução contínua.
+Desenvolvido com foco em qualidade de código, boas práticas e evolução contínua.
 </p>
