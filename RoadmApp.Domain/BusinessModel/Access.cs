@@ -1,24 +1,32 @@
 ﻿using RoadmApp.Domain.Utils.Contants;
 
-namespace RoadmApp.Domain.Models
+namespace RoadmApp.Domain.BusinessModel
 {
-    public class AccessModel
+    public class Access
     {
         public string AccessId { get; private set; } = string.Empty;
         public string Nickname { get; private set; } = string.Empty;
         public string Password { get; private set; } = string.Empty;
         public bool IsBlocked { get; private set; } = false;
 
-        public AccessModel() { }
-        public AccessModel(string nickname, string password)
+        public Access() { }
+        public Access(string nickname, string password)
         {
             Nickname = nickname;
             Password = password;
         }
-        public AccessModel(string nickname)
+        public Access(string nickname)
         {
             Nickname = nickname;
             Password = PatternAccountConfig.PatternFirstRegister;
+        }
+        public Access ToBusiness(Register register)
+        {
+            return new()
+            {
+                Nickname = register.Access.Nickname,
+                Password = PatternAccountConfig.PatternFirstRegister
+            };
         }
     }
 }

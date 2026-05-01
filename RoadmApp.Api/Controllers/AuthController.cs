@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RoadmApp.Api.DTOs;
+using RoadmApp.Application.UseCases.Access.CreateAccess;
 using RoadmApp.Domain.Interfaces.IServices;
 
 namespace RoadmApp.Api.Controllers

@@ -1,15 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RoadmApp.Domain.Entities;
+using RoadmApp.Domain.BusinessModel;
 using RoadmApp.Domain.Interfaces.IServices;
-using RoadmApp.Domain.Models;
 
 namespace RoadmApp.Api.Controllers
 {
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class LogController : ControllerBase 
+    public class LogController : ControllerBase
     {
         private readonly ILogService _logService;
 
@@ -23,7 +22,7 @@ namespace RoadmApp.Api.Controllers
         {
             try
             {
-                List<LogModel> logs = await _logService.GetLogs();
+                List<Log> logs = await _logService.GetLogs();
                 return Ok(logs);
             }
             catch (Exception ex)

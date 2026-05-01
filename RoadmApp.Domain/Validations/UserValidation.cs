@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
-using RoadmApp.Domain.Models;
+using RoadmApp.Domain.BusinessModel;
 
 namespace RoadmApp.Domain.Validations
 {
-    public class UserValidation : AbstractValidator<UserModel>
+    public class UserValidation : AbstractValidator<User>
     {
         public UserValidation()
         {

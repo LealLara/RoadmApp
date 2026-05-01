@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using RoadmApp.Application.UseCases.Access.CreateAccess;
 using RoadmApp.Domain.Interfaces.IRepositories;
 using RoadmApp.Domain.Interfaces.IServices;
 using RoadmApp.Domain.Services;
@@ -63,7 +64,7 @@ try
     builder.Services.AddScoped<IAuthService, AuthService>();
     builder.Services.AddScoped<ITokenService, TokenService>();
     builder.Services.AddScoped<IEmailService, EmailService>();
-    builder.Services.AddScoped<IAccessService, AccessService>();
+    builder.Services.AddScoped<ICreateAccessUseCase, CreateAccessUseCase>();
     builder.Services.AddScoped<ILogRepository, LogRepository>();
     builder.Services.AddScoped<IUserRepository, UserRepository>();
     builder.Services.AddScoped<IEmailRepository, EmailRepository>();

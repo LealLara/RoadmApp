@@ -2,7 +2,7 @@
 using RoadmApp.Domain.Entities;
 using RoadmApp.Domain.Factories;
 using RoadmApp.Domain.Interfaces.IRepositories;
-using RoadmApp.Domain.Models;
+using RoadmApp.Domain.BusinessModel;
 using RoadmApp.Infrastructure.Data;
 
 namespace RoadmApp.Infrastructure.Repositories
@@ -17,7 +17,7 @@ namespace RoadmApp.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<UserModel?> GetByNicknameAsync(string nick)
+        public async Task<User?> GetByNicknameAsync(string nick)
         {
             try
             {
@@ -30,7 +30,7 @@ namespace RoadmApp.Infrastructure.Repositories
             }
         }
 
-        public async Task<UserModel?> GetByIdAsync(int id)
+        public async Task<User?> GetByIdAsync(int id)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace RoadmApp.Infrastructure.Repositories
             }
         }
 
-        public async Task<UserModel?> AddAsync(UserEntity user)
+        public async Task<User?> AddAsync(UserEntity user)
         {
             try
             {

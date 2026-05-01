@@ -1,10 +1,9 @@
-﻿using RoadmApp.Domain.Entities;
-using RoadmApp.Domain.Models;
+﻿using RoadmApp.Domain.BusinessModel;
 
 namespace RoadmApp.Domain.Interfaces.IServices
 {
-    public interface IAccessService
+    public interface ICreateAccessUseCase
     {
-        Task<SuccessModel> CreateAccess(RegisterModel data);
+        Task<Success> CreateAccess(Register data);
     }
 }

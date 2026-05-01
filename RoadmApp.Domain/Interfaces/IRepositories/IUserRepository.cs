@@ -1,12 +1,12 @@
 ﻿using RoadmApp.Domain.Entities;
-using RoadmApp.Domain.Models;
+using RoadmApp.Domain.BusinessModel;
 
 namespace RoadmApp.Domain.Interfaces.IRepositories
 {
     public interface IUserRepository
     {
-        Task<UserModel?> GetByNicknameAsync(string email);
-        Task<UserModel?> AddAsync(UserEntity user);
-        Task<UserModel?> GetByIdAsync(int id);
+        Task<User?> GetByNicknameAsync(string email);
+        Task<User?> AddAsync(UserEntity user);
+        Task<User?> GetByIdAsync(int id);
     }
 }

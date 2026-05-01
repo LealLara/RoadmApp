@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
-using RoadmApp.Domain.Models;
+using RoadmApp.Domain.BusinessModel;
 
 namespace RoadmApp.Domain.Validations
 {
-    public class CreateAccessValidation : AbstractValidator<RegisterModel>
+    public class CreateAccessValidation : AbstractValidator<Register>
     {
         public CreateAccessValidation()
         {

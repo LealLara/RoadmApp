@@ -1,6 +1,6 @@
-﻿using RoadmApp.Domain.Models;
+﻿using RoadmApp.Application.Models;
 
-namespace RoadmApp.Api.DTOs
+namespace RoadmApp.Application.UseCases.Access.CreateAccess
 {
     public class AccessDto
     {
@@ -13,6 +13,6 @@ namespace RoadmApp.Api.DTOs
                 nickname: Nickname,
                 password: Password
             );
-        }
+        }  
     }
 }

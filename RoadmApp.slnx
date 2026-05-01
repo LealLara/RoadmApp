@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="RoadmApp.Api/RoadmApp.Api.csproj" />
+  <Project Path="RoadmApp.Application/RoadmApp.Application.csproj" Id="d7a21060-4253-4e15-81ce-5b65cb2914d7" />
   <Project Path="RoadmApp.CrossCutting/RoadmApp.CrossCutting.csproj" />
   <Project Path="RoadmApp.Domain/RoadmApp.Domain.csproj" />
   <Project Path="RoadmApp.Infrastructure/RoadmApp.Infrastructure.csproj" />

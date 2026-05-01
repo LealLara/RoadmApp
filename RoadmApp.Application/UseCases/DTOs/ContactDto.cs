@@ -1,6 +1,7 @@
-﻿using RoadmApp.Domain.Models;
+﻿using RoadmApp.Application.Models;
+using RoadmApp.Domain.BusinessModel;
 
-namespace RoadmApp.Api.DTOs
+namespace RoadmApp.Application.UseCases.Access.CreateAccess
 {
     public class ContactDto
     {
@@ -9,6 +10,14 @@ namespace RoadmApp.Api.DTOs
         public string Email { get; set; } = string.Empty;
 
         public ContactModel Transform()
+        {
+            return new(
+                email: Email,
+                cellphone: Cellphone,
+                flagWhatsApp: FlagWhatsApp
+            );
+        }
+        public Contact ToBusiness()
         {
             return new(
                 email: Email,

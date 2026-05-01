@@ -1,13 +1,13 @@
 ﻿using RoadmApp.Domain.Entities;
-using RoadmApp.Domain.Models;
+using RoadmApp.Domain.BusinessModel;
 
 namespace RoadmApp.Domain.Factories
 {
     public static class ModelFactory
     {
-        public static LogModel CreateLogModel(LogEntity logEntity)
+        public static Log CreateLogModel(LogEntity logEntity)
         {
-            return new LogModel(
+            return new Log(
 
                 logId: logEntity.LogId,
                 logMessage: logEntity.LogMessage,
@@ -17,25 +17,25 @@ namespace RoadmApp.Domain.Factories
             );
         }
 
-        public static LogEntity CreateLogEntity(LogModel logModel)
+        public static LogEntity CreateLogEntity(Log log)
         {
             return new LogEntity(
-                logMessage: logModel.LogMessage,
-                logTypeId: logModel.LogTypeId,
-                userId: logModel.UserId,
+                logMessage: log.LogMessage,
+                logTypeId: log.LogTypeId,
+                userId: log.UserId,
                 createdAt: DateTime.Now
             );
         }
-        public static UserEntity CreateUserEntity(RegisterModel registerModel)
+        public static UserEntity CreateUserEntity(Register register)
         {
             return new UserEntity(
-                nickname: registerModel.Access.Nickname,
-                passwordHash: registerModel.Access.Password,
-                contacts: registerModel.Contacts.Select(c => c.Email != null ? c.Email : string.Empty).ToList()
+                nickname: register.Access.Nickname,
+                passwordHash: register.Access.Password,
+                contacts: register.Contacts.Select(c => c.Email != null ? c.Email : string.Empty).ToList()
             );
         }
 
-        public static UserModel CreateUserModel(UserEntity userEntity)
+        public static User CreateUserModel(UserEntity userEntity)
         {
             if (userEntity == null)
                 return null;

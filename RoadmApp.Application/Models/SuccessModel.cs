@@ -1,4 +1,4 @@
-﻿namespace RoadmApp.Domain.Models
+﻿namespace RoadmApp.Application.Models
 {
     public class SuccessModel
     {

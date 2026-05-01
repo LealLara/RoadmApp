@@ -1,7 +1,8 @@
-﻿using RoadmApp.Domain.Entities;
+﻿using RoadmApp.Application.Models;
+using RoadmApp.Domain.Entities;
 using RoadmApp.Domain.Interfaces.IRepositories;
 using RoadmApp.Domain.Interfaces.IServices;
-using RoadmApp.Domain.Models;
+using RoadmApp.Domain.BusinessModel;
 using RoadmApp.Domain.Utils.Enums;
 using RoadmApp.Domain.Utils.StringTools;
 using RoadmApp.Domain.Utils.Templates;
@@ -16,9 +17,9 @@ namespace RoadmApp.Domain.Services
             _emailRepository = emailRepository;
         }
 
-        public async Task<List<EmailTypeModel>> GetEmailTyes()
+        public async Task<List<EmailType>> GetEmailTyes()
         {
-            List<EmailTypeModel> types = new();
+            List<EmailType> types = new();
             List<EEmailType> data = await _emailRepository.GetEmailTyes(); 
 
             if(data == null)
@@ -26,7 +27,7 @@ namespace RoadmApp.Domain.Services
 
             foreach (var item in data) 
             {
-                EmailTypeModel emailType = new()
+                EmailType emailType = new()
                 {
                     Id = (int)item,
                     Description = item.GetDescription()
@@ -36,7 +37,7 @@ namespace RoadmApp.Domain.Services
             return types;
         }
 
-        public async Task SendAsync(EmailModel data)
+        public async Task SendAsync(Email data)
         {
             EmailEntity emailBody = new();
 

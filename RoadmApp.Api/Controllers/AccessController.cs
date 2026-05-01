@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RoadmApp.Api.DTOs;
-using RoadmApp.Domain.Entities;
+using RoadmApp.Application.Models;
+using RoadmApp.Application.UseCases.Access.CreateAccess;
 using RoadmApp.Domain.Interfaces.IServices;
-using RoadmApp.Domain.Models;
+using RoadmApp.Domain.BusinessModel;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace RoadmApp.Api.Controllers
@@ -11,9 +11,9 @@ namespace RoadmApp.Api.Controllers
     [Route("api/[controller]")]
     public class AccessController : ControllerBase
     {
-        private readonly IAccessService _accessService;
+        private readonly ICreateAccessUseCase _accessService;
 
-        public AccessController(IAccessService accessService)
+        public AccessController(ICreateAccessUseCase accessService)
         {
             _accessService = accessService;
         }
@@ -32,7 +32,7 @@ namespace RoadmApp.Api.Controllers
         {
             try
             {
-                SuccessModel data = await _accessService.CreateAccess(dto.Transform());
+                Success data = await _accessService.CreateAccess(dto.ToBusiness());
                 return Ok();
             }
             catch (Exception ex)

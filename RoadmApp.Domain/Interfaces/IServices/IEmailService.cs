@@ -1,10 +1,10 @@
-﻿using RoadmApp.Domain.Models;
+﻿using RoadmApp.Domain.BusinessModel;
 
 namespace RoadmApp.Domain.Interfaces.IServices
 {
     public interface IEmailService
     {
-        Task SendAsync(EmailModel body);
-        Task<List<EmailTypeModel>> GetEmailTyes();
+        Task SendAsync(Email body);
+        Task<List<EmailType>> GetEmailTyes();
     }
 }

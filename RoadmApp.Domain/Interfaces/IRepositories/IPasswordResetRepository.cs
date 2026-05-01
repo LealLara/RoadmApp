@@ -1,11 +1,11 @@
-﻿using RoadmApp.Domain.Models;
+﻿using RoadmApp.Domain.BusinessModel;
 
 namespace RoadmApp.Domain.Interfaces.IRepositories
 {
     public interface IPasswordResetRepository
     {
-        Task CreateAsync(PasswordResetTokenModel token);
-        Task<PasswordResetTokenModel?> GetByTokenAsync(string token);
-        Task RemoveAsync(PasswordResetTokenModel token);
+        Task CreateAsync(PasswordResetToken token);
+        Task<PasswordResetToken?> GetByTokenAsync(string token);
+        Task RemoveAsync(PasswordResetToken token);
     }
 }

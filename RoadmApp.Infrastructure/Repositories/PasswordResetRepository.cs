@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RoadmApp.Domain.Interfaces.IRepositories;
-using RoadmApp.Domain.Models;
+using RoadmApp.Domain.BusinessModel;
 using RoadmApp.Infrastructure.Data;
 
 namespace RoadmApp.Infrastructure.Repositories
@@ -14,19 +14,19 @@ namespace RoadmApp.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task CreateAsync(PasswordResetTokenModel token)
+        public async Task CreateAsync(PasswordResetToken token)
         {
-            await _context.Set<PasswordResetTokenModel>().AddAsync(token);
+            await _context.Set<PasswordResetToken>().AddAsync(token);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<PasswordResetTokenModel?> GetByTokenAsync(string token)
+        public async Task<PasswordResetToken?> GetByTokenAsync(string token)
         {
-            return await _context.Set<PasswordResetTokenModel>()
+            return await _context.Set<PasswordResetToken>()
                 .FirstOrDefaultAsync(x => x.Token == token);
         }
 
-        public async Task RemoveAsync(PasswordResetTokenModel token)
+        public async Task RemoveAsync(PasswordResetToken token)
         {
             _context.Remove(token);
             await _context.SaveChangesAsync();

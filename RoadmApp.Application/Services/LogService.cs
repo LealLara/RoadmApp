@@ -1,7 +1,7 @@
 ﻿using RoadmApp.Domain.Entities;
 using RoadmApp.Domain.Interfaces.IRepositories;
 using RoadmApp.Domain.Interfaces.IServices;
-using RoadmApp.Domain.Models;
+using RoadmApp.Domain.BusinessModel;
 
 namespace RoadmApp.Domain.Services
 {
@@ -13,12 +13,12 @@ namespace RoadmApp.Domain.Services
             _logRepository = logRepository;
         }
 
-        public Task<LogModel> AddLog(LogEntity log)
+        public Task<Log> AddLog(LogEntity log)
         {
             return _logRepository.AddLog(log);
         }
 
-        public Task<List<LogModel>> GetLogs()
+        public Task<List<Log>> GetLogs()
         {
             return _logRepository.GetLogs();
         }

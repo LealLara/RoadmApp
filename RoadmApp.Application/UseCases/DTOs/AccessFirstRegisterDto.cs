@@ -1,12 +1,13 @@
-﻿using RoadmApp.Domain.Models;
+﻿using RoadmApp.Application.Models;
 using RoadmApp.Domain.Utils.Contants;
+using RoadmApp.Domain.BusinessModel;
 
-namespace RoadmApp.Api.DTOs
+
+namespace RoadmApp.Application.UseCases.Access.CreateAccess
 {
     public class AccessFirstRegisterDto
     {
-
-        public string Nickname { get; set; } = string.Empty; 
+        public string Nickname { get; set; } = string.Empty;
 
         public AccessModel Transform()
         {
@@ -14,6 +15,6 @@ namespace RoadmApp.Api.DTOs
                 nickname: Nickname,
                 password: PatternAccountConfig.PatternFirstRegister
             );
-        }
+        } 
     }
 }

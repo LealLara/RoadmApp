@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
-using RoadmApp.Domain.Models;
+using RoadmApp.Domain.BusinessModel;
 
 namespace RoadmApp.Domain.Validations
 {
-    public class ContactValidation : AbstractValidator<ContactModel>
+    public class ContactValidation : AbstractValidator<Contact>
     {
         public ContactValidation()
         {

@@ -1,4 +1,4 @@
-﻿using RoadmApp.Domain.Models;
+﻿using RoadmApp.Domain.BusinessModel; 
 using System.ComponentModel.DataAnnotations;
 
 namespace RoadmApp.Domain.Entities
@@ -71,7 +71,7 @@ namespace RoadmApp.Domain.Entities
             };
         }
 
-        public UserEntity TransformToUserEntity(RegisterModel register)
+        public UserEntity TransformToUserEntity(Register register)
         {
             return new(
                 username: register.User.Name,

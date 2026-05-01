@@ -1,4 +1,4 @@
-﻿namespace RoadmApp.Api.DTOs
+﻿namespace RoadmApp.Application.UseCases.Access.CreateAccess
 {
     public class LoginDto
     {

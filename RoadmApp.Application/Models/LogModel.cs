@@ -2,7 +2,7 @@
 using RoadmApp.Domain.Entities;
 using RoadmApp.Domain.Utils.Enums;
 
-namespace RoadmApp.Domain.Models
+namespace RoadmApp.Application.Models
 {
     public class LogModel
     {
