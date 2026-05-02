@@ -1,4 +1,4 @@
-﻿using RoadmApp.Domain.BusinessModel; 
+﻿using RoadmApp.Domain.BusinessModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace RoadmApp.Domain.Entities
@@ -14,12 +14,21 @@ namespace RoadmApp.Domain.Entities
         public ICollection<ContactEntity> Contacts { get; private set; } = new List<ContactEntity>();
 
         public UserEntity() { }
+
         public UserEntity(string username, string nickname, string passwordHash, List<string> contacts) : this()
         {
             Name = username;
             Nickname = nickname;
             PasswordHash = passwordHash;
             Contacts = contacts.Select(email => new ContactEntity(email)).ToList();
+        } 
+        public UserEntity(string username, string nickname, string passwordHash, DateTime birthday, Contact contacts) : this()
+        {
+            Name = username;
+            Nickname = nickname;
+            PasswordHash = passwordHash;
+            Birthday = birthday;
+            Contacts = new List<ContactEntity> { new ContactEntity(contacts.Email, contacts.Cellphone, contacts.FlagWhatsApp) };
         }
         public UserEntity(string username, string nickname, string passwordHash, DateTime birthday) : this()
         {

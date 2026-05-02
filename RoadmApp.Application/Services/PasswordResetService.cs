@@ -1,6 +1,6 @@
-﻿using RoadmApp.Domain.Interfaces.IServices;
+﻿using RoadmApp.Application.IServices;
 
-namespace RoadmApp.Domain.Services
+namespace RoadmApp.Application.Services
 {
     public class PasswordResetService : IPasswordResetService
     {

@@ -1,7 +1,7 @@
-﻿using RoadmApp.Domain.Interfaces.IRepositories;
-using RoadmApp.Domain.Interfaces.IServices;
+﻿using RoadmApp.Application.IServices;
+using RoadmApp.Domain.IRepositories;
 
-namespace RoadmApp.Domain.Services
+namespace RoadmApp.Application.Services
 {
     public class TokenService : ITokenService
     {

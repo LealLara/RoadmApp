@@ -1,4 +1,4 @@
-﻿namespace RoadmApp.Application.Models
+﻿namespace RoadmApp.Application.Responses
 {
     public class EmailTypeModel
     {

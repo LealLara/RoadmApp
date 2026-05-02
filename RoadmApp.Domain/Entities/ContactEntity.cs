@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using RoadmApp.Domain.BusinessModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace RoadmApp.Domain.Entities
 {
@@ -18,9 +19,27 @@ namespace RoadmApp.Domain.Entities
             Cellphone = cellphone;
             FlagWhatsApp = flagWhatsApp;
         }
+        public ContactEntity(string email, string cellphone, bool flagWhatsApp, int userId) : this()
+        {
+            Email = email;
+            Cellphone = cellphone;
+            FlagWhatsApp = flagWhatsApp;
+            UserId = userId;
+        }
         public ContactEntity(string email) : this()
         {
             Email = email;
+        }
+        public ContactEntity TransformToUserEntity(Contact contact)
+        {
+            return new()
+            {
+                ContactId = contact.ContactId,
+                Email = contact.Email,
+                Cellphone = contact.Cellphone,
+                FlagWhatsApp = contact.FlagWhatsApp,
+                UserId = contact.UserId
+            };
         }
     }
 }

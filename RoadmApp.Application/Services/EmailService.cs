@@ -1,8 +1,7 @@
-﻿using RoadmApp.Application.Models;
-using RoadmApp.Domain.Entities;
-using RoadmApp.Domain.Interfaces.IRepositories;
-using RoadmApp.Domain.Interfaces.IServices;
+﻿using RoadmApp.Application.IServices;
 using RoadmApp.Domain.BusinessModel;
+using RoadmApp.Domain.Entities;
+using RoadmApp.Domain.IRepositories;
 using RoadmApp.Domain.Utils.Enums;
 using RoadmApp.Domain.Utils.StringTools;
 using RoadmApp.Domain.Utils.Templates;
@@ -20,12 +19,12 @@ namespace RoadmApp.Domain.Services
         public async Task<List<EmailType>> GetEmailTyes()
         {
             List<EmailType> types = new();
-            List<EEmailType> data = await _emailRepository.GetEmailTyes(); 
+            List<EEmailType> data = await _emailRepository.GetEmailTyes();
 
-            if(data == null)
+            if (data == null)
                 return types;
 
-            foreach (var item in data) 
+            foreach (var item in data)
             {
                 EmailType emailType = new()
                 {

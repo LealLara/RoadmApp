@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RoadmApp.Application.IServices;
 using RoadmApp.Application.UseCases.Access.CreateAccess;
-using RoadmApp.Domain.Interfaces.IServices;
 
 namespace RoadmApp.Api.Controllers
 {

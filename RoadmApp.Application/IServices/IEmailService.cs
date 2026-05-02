@@ -1,6 +1,6 @@
 ﻿using RoadmApp.Domain.BusinessModel;
 
-namespace RoadmApp.Domain.Interfaces.IServices
+namespace RoadmApp.Application.IServices
 {
     public interface IEmailService
     {

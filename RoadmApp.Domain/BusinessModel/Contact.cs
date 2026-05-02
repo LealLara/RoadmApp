@@ -1,4 +1,6 @@
-﻿namespace RoadmApp.Domain.BusinessModel
+﻿using RoadmApp.Domain.Entities;
+
+namespace RoadmApp.Domain.BusinessModel
 {
     public class Contact
     {
@@ -15,9 +17,34 @@
             Cellphone = cellphone;
             FlagWhatsApp = flagWhatsApp;
         }
+        public Contact(string email, string cellphone, bool flagWhatsApp, int userId) : this()
+        {
+            Email = email;
+            Cellphone = cellphone;
+            FlagWhatsApp = flagWhatsApp;
+            UserId = userId;
+        }
+        public Contact(int contactId, string email, string cellphone, bool flagWhatsApp, int userId) : this()
+        {
+            ContactId = contactId;
+            Email = email;
+            Cellphone = cellphone;
+            FlagWhatsApp = flagWhatsApp;
+            UserId = userId;
+        }
         public Contact(string email) : this()
         {
             Email = email;
+        }
+   
+        public ContactEntity TransformToContactEntity(Contact user)
+        {
+            return new(
+                email: Email,
+                cellphone: Cellphone,
+                flagWhatsApp: FlagWhatsApp,
+                userId: user.UserId
+            );
         }
     }
 }

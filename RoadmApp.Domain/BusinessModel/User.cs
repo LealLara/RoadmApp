@@ -1,4 +1,6 @@
-﻿namespace RoadmApp.Domain.BusinessModel
+﻿using RoadmApp.Domain.Utils.Contants;
+
+namespace RoadmApp.Domain.BusinessModel
 {
     public class User
     {
@@ -7,10 +9,10 @@
         public string Nickname { get; private set; } = string.Empty;
         public string PasswordHash { get; private set; }
         public DateTime Birthday { get; private set; } = DateTime.Today;
-        public ICollection<Contact> Contacts { get; private set; } = new List<Contact>();
+        public List<Contact> Contacts { get; private set; } = new List<Contact>();
 
         public User() { }
-        public User(int userId, string nickname, string name, string passwordHash, DateTime birthday, ICollection<Contact> contacts) : this()
+        public User(int userId, string nickname, string name, string passwordHash, DateTime birthday, List<Contact> contacts) : this()
         {
             UserId = userId;
             Name = name;
@@ -41,6 +43,15 @@
             Name = name;
             Birthday = birthday;
         }
+        public User(int userId, string name, string nickname,  DateTime birthday, string passwordHash) : this()
+        {
+            UserId = userId;
+            Name = name;
+            Nickname = nickname;
+            Name = name;
+            Birthday = birthday;
+            PasswordHash = passwordHash;
+        }
         public User(string nickname, string passwordHash) : this()
         {
             Nickname = nickname;
@@ -63,6 +74,12 @@
             Nickname = nickname;
             Contacts = contacts;
         }
+        public User(int userId, string nickname, Contact contacts) : this()
+        {
+            UserId = userId;
+            Nickname = nickname;
+            Contacts = new List<Contact> { contacts };
+        }
         public string GenerateHash(string password)
         {
             if (string.IsNullOrWhiteSpace(password))
@@ -75,10 +92,19 @@
         public string SetPassword(string password)
         {
             if (string.IsNullOrWhiteSpace(password))
-                throw new ArgumentException("Password cannot be null or empty.", nameof(password));
+                throw new ArgumentException("A senha não pode ser nula ou vazia.", nameof(password));
 
             PasswordHash = GenerateHash(password);
             return PasswordHash;
+        }
+        public string SetPatternPasswordResult()
+        {
+            return PasswordHash = PatternAccountConfig.PatternFirstRegister;
+        }
+        public List<Contact> SetContactResult(Contact contact)
+        {
+            Contacts = new List<Contact> { contact };
+            return Contacts;
         }
         public User Transform(Register register)
         {
@@ -88,10 +114,10 @@
                 Birthday = register.User.Birthday,
                 Nickname = register.Access.Nickname,
                 PasswordHash = SetPassword(register.Access.Password),
-                Contacts = register.Contacts,
+                Contacts = new List<Contact> { register.Contacts },
             };
         }
-        public User TransformResult()
+        public User Transform()
         {
             return new()
             {
@@ -107,7 +133,7 @@
                 Birthday = register.User.Birthday,
                 Nickname = register.Access.Nickname,
                 PasswordHash = SetPassword(register.Access.Password),
-                Contacts = register.Contacts,
+                Contacts = new List<Contact> { register.Contacts },
             };
         }
     }

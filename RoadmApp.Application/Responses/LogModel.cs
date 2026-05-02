@@ -1,8 +1,4 @@
-﻿using Microsoft.IdentityModel.Abstractions;
-using RoadmApp.Domain.Entities;
-using RoadmApp.Domain.Utils.Enums;
-
-namespace RoadmApp.Application.Models
+﻿namespace RoadmApp.Application.Responses
 {
     public class LogModel
     {

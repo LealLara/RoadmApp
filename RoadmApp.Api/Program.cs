@@ -2,9 +2,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using RoadmApp.Application.IServices;
+using RoadmApp.Application.Services;
 using RoadmApp.Application.UseCases.Access.CreateAccess;
-using RoadmApp.Domain.Interfaces.IRepositories;
-using RoadmApp.Domain.Interfaces.IServices;
+using RoadmApp.Domain.IRepositories;
 using RoadmApp.Domain.Services;
 using RoadmApp.Infrastructure.Data;
 using RoadmApp.Infrastructure.Repositories;
@@ -38,8 +39,7 @@ try
             Description = "Insira o token JWT no formato: Bearer {seu token}"
         });
 
-        c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
+        c.AddSecurityRequirement(new OpenApiSecurityRequirement {
         {
             new OpenApiSecurityScheme
             {
@@ -64,12 +64,13 @@ try
     builder.Services.AddScoped<IAuthService, AuthService>();
     builder.Services.AddScoped<ITokenService, TokenService>();
     builder.Services.AddScoped<IEmailService, EmailService>();
-    builder.Services.AddScoped<ICreateAccessUseCase, CreateAccessUseCase>();
     builder.Services.AddScoped<ILogRepository, LogRepository>();
     builder.Services.AddScoped<IUserRepository, UserRepository>();
     builder.Services.AddScoped<IEmailRepository, EmailRepository>();
     builder.Services.AddScoped<ITokenRepository, TokenRepository>();
     builder.Services.AddScoped<IAccessRepository, AccessRepository>();
+    builder.Services.AddScoped<IContactRepository, ContactRepository>();
+    builder.Services.AddScoped<ICreateAccessUseCase, CreateAccessUseCase>();
     builder.Services.AddScoped<IPasswordResetService, PasswordResetService>();
     builder.Services.AddScoped<IPasswordResetRepository, PasswordResetRepository>();
 
@@ -97,15 +98,14 @@ try
         var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         db.Database.EnsureCreated();
     }
-
-    // Configure the HTTP request pipeline.
+     
     if (app.Environment.IsDevelopment())
     {
         app.UseSwagger();
         app.UseSwaggerUI(c =>
         {
             c.SwaggerEndpoint("/swagger/v1/swagger.json", "RoadmApp API v1");
-            c.RoutePrefix = "swagger"; // Importante!
+            c.RoutePrefix = "swagger"; 
         });
     }
 

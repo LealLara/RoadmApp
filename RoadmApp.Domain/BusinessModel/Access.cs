@@ -18,15 +18,16 @@ namespace RoadmApp.Domain.BusinessModel
         public Access(string nickname)
         {
             Nickname = nickname;
-            Password = PatternAccountConfig.PatternFirstRegister;
+            Password = BCrypt.Net.BCrypt.HashPassword(PatternAccountConfig.PatternFirstRegister);
         }
         public Access ToBusiness(Register register)
         {
             return new()
             {
                 Nickname = register.Access.Nickname,
-                Password = PatternAccountConfig.PatternFirstRegister
+                Password = register.Access.Password,
             };
         }
+
     }
 }

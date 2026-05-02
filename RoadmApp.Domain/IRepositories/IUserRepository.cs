@@ -1,7 +1,7 @@
 ﻿using RoadmApp.Domain.Entities;
 using RoadmApp.Domain.BusinessModel;
 
-namespace RoadmApp.Domain.Interfaces.IRepositories
+namespace RoadmApp.Domain.IRepositories
 {
     public interface IUserRepository
     {

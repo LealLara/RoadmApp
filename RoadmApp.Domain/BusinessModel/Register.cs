@@ -4,7 +4,7 @@
     {
         public Access Access { get; set; } = new();
         public User User { get; set; } = new();
-        public List<Contact> Contacts { get; set; } = new List<Contact>();
+        public Contact Contacts { get; set; } = new Contact();
 
     }
 }

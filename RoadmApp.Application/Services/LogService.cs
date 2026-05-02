@@ -1,7 +1,7 @@
-﻿using RoadmApp.Domain.Entities;
-using RoadmApp.Domain.Interfaces.IRepositories;
-using RoadmApp.Domain.Interfaces.IServices;
+﻿using RoadmApp.Application.IServices;
 using RoadmApp.Domain.BusinessModel;
+using RoadmApp.Domain.Entities;
+using RoadmApp.Domain.IRepositories;
 
 namespace RoadmApp.Domain.Services
 {

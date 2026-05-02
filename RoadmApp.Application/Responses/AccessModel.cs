@@ -1,8 +1,7 @@
 ﻿using RoadmApp.Domain.BusinessModel;
-using RoadmApp.Domain.Utils.Contants;
 
-namespace RoadmApp.Application.Models 
-{ 
+namespace RoadmApp.Application.Responses
+{
     public class AccessModel
     {
         public string AccessId { get; private set; } = string.Empty;
@@ -19,13 +18,13 @@ namespace RoadmApp.Application.Models
         public AccessModel(string nickname)
         {
             Nickname = nickname;
-            Password = PatternAccountConfig.PatternFirstRegister;
+            Password = Password;
         }
         public Access ToBusiness()
         {
-            return new (
+            return new(
                 nickname: Nickname,
-                password: PatternAccountConfig.PatternFirstRegister
+                password: Password
 
             );
         }

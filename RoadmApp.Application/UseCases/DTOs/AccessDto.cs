@@ -1,4 +1,4 @@
-﻿using RoadmApp.Application.Models;
+﻿using RoadmApp.Application.Responses;
 
 namespace RoadmApp.Application.UseCases.Access.CreateAccess
 {

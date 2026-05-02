@@ -1,6 +1,5 @@
-﻿using RoadmApp.Application.Models;
+﻿using RoadmApp.Application.Responses;
 using RoadmApp.Domain.Utils.Contants;
-using RoadmApp.Domain.BusinessModel;
 
 
 namespace RoadmApp.Application.UseCases.Access.CreateAccess
@@ -13,8 +12,8 @@ namespace RoadmApp.Application.UseCases.Access.CreateAccess
         {
             return new(
                 nickname: Nickname,
-                password: PatternAccountConfig.PatternFirstRegister
+                password: BCrypt.Net.BCrypt.HashPassword(PatternAccountConfig.PatternFirstRegister)
             );
-        } 
+        }
     }
 }

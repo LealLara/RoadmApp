@@ -1,4 +1,4 @@
-﻿using RoadmApp.Domain.Interfaces.IRepositories;
+﻿using RoadmApp.Domain.IRepositories;
 
 namespace RoadmApp.Infrastructure.Repositories
 {

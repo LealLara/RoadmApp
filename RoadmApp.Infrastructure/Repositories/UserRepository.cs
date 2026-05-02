@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RoadmApp.Domain.Entities;
 using RoadmApp.Domain.Factories;
-using RoadmApp.Domain.Interfaces.IRepositories;
 using RoadmApp.Domain.BusinessModel;
 using RoadmApp.Infrastructure.Data;
+using RoadmApp.Domain.IRepositories;
 
 namespace RoadmApp.Infrastructure.Repositories
 {
@@ -29,7 +29,7 @@ namespace RoadmApp.Infrastructure.Repositories
                 throw new Exception(ex.ToString());
             }
         }
-
+        
         public async Task<User?> GetByIdAsync(int id)
         {
             try

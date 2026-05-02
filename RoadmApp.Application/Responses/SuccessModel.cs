@@ -1,4 +1,6 @@
-﻿namespace RoadmApp.Application.Models
+﻿using RoadmApp.Domain.BusinessModel;
+
+namespace RoadmApp.Application.Responses
 {
     public class SuccessModel
     {

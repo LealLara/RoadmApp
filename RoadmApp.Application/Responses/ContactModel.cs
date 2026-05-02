@@ -1,6 +1,6 @@
 ﻿using RoadmApp.Domain.BusinessModel;
 
-namespace RoadmApp.Application.Models
+namespace RoadmApp.Application.Responses
 {
     public class ContactModel
     {

@@ -1,4 +1,4 @@
-﻿namespace RoadmApp.Domain.Interfaces.IRepositories
+﻿namespace RoadmApp.Domain.IRepositories
 {
     public interface IAccessRepository
     {

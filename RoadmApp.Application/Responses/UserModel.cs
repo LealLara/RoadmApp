@@ -1,4 +1,7 @@
-﻿namespace RoadmApp.Application.Models
+﻿using Microsoft.Win32;
+using RoadmApp.Domain.BusinessModel;
+
+namespace RoadmApp.Application.Responses
 {
     public class UserModel
     {
@@ -88,7 +91,7 @@
                 Birthday = register.User.Birthday,
                 Nickname = register.Access.Nickname,
                 PasswordHash = SetPassword(register.Access.Password),
-                Contacts = register.Contacts,
+                Contacts = new List<ContactModel> { register.Contacts },
             };
         }
         public UserModel TransformResult()
@@ -98,6 +101,17 @@
                 Name = Name,
                 Birthday = Birthday
             };
+        }
+        public User ToBusiness()
+        {
+            return new(
+               userId: UserId,
+               name: Name,
+               nickname: Nickname,
+               passwordHash: PasswordHash,
+               birthday: Birthday,
+               contacts: Contacts.Select(c => c.ToBusiness()).ToList()
+            );
         }
     }
 }

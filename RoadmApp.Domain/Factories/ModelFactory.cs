@@ -1,5 +1,5 @@
-﻿using RoadmApp.Domain.Entities;
-using RoadmApp.Domain.BusinessModel;
+﻿using RoadmApp.Domain.BusinessModel;
+using RoadmApp.Domain.Entities;
 
 namespace RoadmApp.Domain.Factories
 {
@@ -28,23 +28,53 @@ namespace RoadmApp.Domain.Factories
         }
         public static UserEntity CreateUserEntity(Register register)
         {
-            return new UserEntity(
+            return new (
+                username: register.User.Name,
                 nickname: register.Access.Nickname,
                 passwordHash: register.Access.Password,
-                contacts: register.Contacts.Select(c => c.Email != null ? c.Email : string.Empty).ToList()
+                birthday: register.User.Birthday,
+                contacts: register.Contacts
             );
         }
 
-        public static User CreateUserModel(UserEntity userEntity)
+        public static User CreateUserModel(UserEntity entity)
         {
-            if (userEntity == null)
+            if (entity == null)
                 return null;
 
             return new(
-                userId: userEntity.UserId,
-                nickname: userEntity.Nickname,
-                name: userEntity.Name,
-                birthday: userEntity.Birthday
+                userId: entity.UserId,
+                nickname: entity.Nickname,
+                name: entity.Name,
+                birthday: entity.Birthday
+            );
+        }
+        public static List<Contact> CreateContactListModel(IList<ContactEntity> entities)
+        {
+            if (entities == null)
+                return null;
+
+            return new(
+                entities.Select(e => new Contact(
+                    contactId: e.ContactId,
+                    email: e.Email,
+                    cellphone: e.Cellphone,
+                    flagWhatsApp: e.FlagWhatsApp,
+                    userId: e.UserId
+                ))
+            );
+        }
+        public static Contact CreateContactModel(ContactEntity entity)
+        {
+            if (entity == null)
+                return null;
+
+            return new(
+                    contactId: entity.ContactId,
+                    email: entity.Email,
+                    cellphone: entity.Cellphone,
+                    flagWhatsApp: entity.FlagWhatsApp,
+                    userId: entity.UserId
             );
         }
     }

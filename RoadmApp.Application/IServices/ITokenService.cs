@@ -1,4 +1,4 @@
-﻿namespace RoadmApp.Domain.Interfaces.IServices
+﻿namespace RoadmApp.Application.IServices
 {
     public interface ITokenService
     {
