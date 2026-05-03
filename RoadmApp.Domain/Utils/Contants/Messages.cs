@@ -10,5 +10,6 @@
         public const string TokenGenerationError = "Erro ao gerar token de autenticação.";
         public const string UserLoggedIn = "Usuário logado com sucesso:";
         public const string InvalidPatternPassword = "Senha inválida. A senha padrão já foi atualizada paara este usuário";
+        public const string ErrorUpdatingPassword = "Erro ao atualizar a senha do usuário.";
     }
 }
