@@ -3,13 +3,15 @@
     public enum ELogType
     {
         Creation = 1,
-        Update = 2,
-        Export = 3,
-        Info = 4,
-        Login = 5,
-        EmailSent = 6,
-        BlockedUser = 7,
-        Warning = 8,
-        Error = 9      
+        FirstAccess = 2,
+        Update = 3,
+        Export = 4,
+        Info = 5,
+        Login = 6,
+        EmailSent = 7,
+        BlockedUser = 8,
+        Warning = 9,
+        Error = 10,
+        LastAccess = 11,
     }
 }       

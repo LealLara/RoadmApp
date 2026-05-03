@@ -17,16 +17,15 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.1.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RoadmApp.Application\RoadmApp.Application.csproj" />
     <ProjectReference Include="..\RoadmApp.CrossCutting\RoadmApp.CrossCutting.csproj" />
+    <ProjectReference Include="..\RoadmApp.Domain\RoadmApp.Domain.csproj" />
     <ProjectReference Include="..\RoadmApp.Infrastructure\RoadmApp.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>

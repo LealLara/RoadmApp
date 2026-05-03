@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RoadmApp.Api.DTOs;
-using RoadmApp.Domain.Interfaces.IServices;
+using RoadmApp.Application.IServices;
+using RoadmApp.Application.UseCases.Access.CreateAccess;
+using RoadmApp.Domain.BusinessModel;
 
 namespace RoadmApp.Api.Controllers
 {
@@ -20,8 +21,9 @@ namespace RoadmApp.Api.Controllers
         {
             try
             {
-                var token = await _authService.Login(dto.Login, dto.Password);
-                return Ok(new { token });
+                Success token = await _authService.Login(dto.Nickname, dto.Password);
+                // return Ok(new { token = new SuccessModel().Transform(token) });
+                return Ok(token);
             }
             catch (Exception ex)
             {

@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using RoadmApp.Domain.Models;
+using RoadmApp.Domain.BusinessModel;
 
 namespace RoadmApp.Domain.Validations
 {
@@ -14,18 +14,10 @@ namespace RoadmApp.Domain.Validations
             RuleFor(x => x.User)
                 .NotNull().WithMessage("User é obrigatório.")
                 .SetValidator(new UserValidation());
-
-            RuleFor(x => x.ConfirmPassword)
-                .NotEmpty().WithMessage("Confirmação de senha é obrigatória.")
-                .Equal(x => x.Access.Password)
-                .WithMessage("As senhas não coincidem.");
-
+             
             RuleFor(x => x.Contacts)
-                .NotNull().WithMessage("Lista de contatos é obrigatória.")
-                .Must(x => x.Any())
-                .WithMessage("Deve haver ao menos um contato.");
-
-            RuleForEach(x => x.Contacts)
+                .NotNull().WithMessage("Lista de contatos é obrigatória.") 
+                .WithMessage("Deve haver ao menos um contato.")
                 .SetValidator(new ContactValidation());
         }
     }

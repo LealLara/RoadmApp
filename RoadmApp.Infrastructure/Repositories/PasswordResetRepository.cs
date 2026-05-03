@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RoadmApp.Domain.Interfaces.IRepositories;
-using RoadmApp.Domain.Models;
+using RoadmApp.Domain.BusinessModel;
 using RoadmApp.Infrastructure.Data;
+using RoadmApp.Domain.IRepositories;
 
 namespace RoadmApp.Infrastructure.Repositories
 {

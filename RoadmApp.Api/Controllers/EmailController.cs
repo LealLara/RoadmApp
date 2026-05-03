@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RoadmApp.Domain.Interfaces.IServices;
-using RoadmApp.Domain.Services;
+using RoadmApp.Application.IServices;
+using RoadmApp.Application.UseCases.Access.CreateAccess;
 
 namespace RoadmApp.Api.Controllers
 {
@@ -14,7 +14,7 @@ namespace RoadmApp.Api.Controllers
         public EmailController(IEmailService emailService)
         {
             _emailService = emailService;
-        } 
+        }
 
         [HttpPost("send-email")]
         public async Task<IActionResult> SendEmail([FromQuery] EmailDto emailDto)

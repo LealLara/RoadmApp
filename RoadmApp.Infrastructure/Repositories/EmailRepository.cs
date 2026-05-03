@@ -1,5 +1,5 @@
 ﻿using RoadmApp.Domain.Entities;
-using RoadmApp.Domain.Interfaces.IRepositories;
+using RoadmApp.Domain.IRepositories;
 using RoadmApp.Domain.Utils.Contants;
 using RoadmApp.Domain.Utils.Enums;
 using RoadmApp.Domain.Utils.StringTools;
@@ -10,7 +10,7 @@ namespace RoadmApp.Infrastructure.Repositories
 {
     public class EmailRepository : IEmailRepository
     {
-        public async Task SendAsync(Email body) 
+        public async Task SendAsync(EmailEntity body) 
         {
 
             string emailSender = EEmailSender.RoadmApp.GetDescription(); 
@@ -43,7 +43,6 @@ namespace RoadmApp.Infrastructure.Repositories
         public async Task<List<EEmailType>> GetEmailTyes()
         {
             return await Task.FromResult(Enum.GetValues(typeof(EEmailType)).Cast<EEmailType>().ToList());
-             
         }   
     }
 }

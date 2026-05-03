@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using RoadmApp.Domain.Entities;
+using RoadmApp.Domain.BusinessModel;
 
 namespace RoadmApp.Domain.Validations
 {

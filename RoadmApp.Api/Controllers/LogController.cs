@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RoadmApp.Domain.Entities;
-using RoadmApp.Domain.Interfaces.IServices;
+using RoadmApp.Application.IServices;
+using RoadmApp.Domain.BusinessModel;
 
 namespace RoadmApp.Api.Controllers
 {
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class LogController : ControllerBase 
+    public class LogController : ControllerBase
     {
         private readonly ILogService _logService;
 

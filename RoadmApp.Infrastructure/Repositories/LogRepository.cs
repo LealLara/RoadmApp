@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RoadmApp.Domain.Entities;
-using RoadmApp.Domain.Interfaces.IRepositories;
+using RoadmApp.Domain.Factories;
+using RoadmApp.Domain.BusinessModel;
 using RoadmApp.Infrastructure.Data;
+using RoadmApp.Domain.IRepositories;
 
 namespace RoadmApp.Infrastructure.Repositories
 {
@@ -14,15 +16,16 @@ namespace RoadmApp.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<Log> AddLog(Log log)
+        public async Task<Log> AddLog(LogEntity log)
         {
             await _context.Logs.AddAsync(log);
             await _context.SaveChangesAsync();
-            return log;
+            return ModelFactory.CreateLogBusiness(log);
         }
         public async Task<List<Log>> GetLogs()
         {
-            return await _context.Logs.ToListAsync();
+            var logEntities = await _context.Logs.ToListAsync();
+            return logEntities.Select(ModelFactory.CreateLogBusiness).ToList();
         }
     }
 }

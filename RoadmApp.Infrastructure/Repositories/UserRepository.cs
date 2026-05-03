@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RoadmApp.Domain.BusinessModel;
 using RoadmApp.Domain.Entities;
-using RoadmApp.Domain.Interfaces.IRepositories;
+using RoadmApp.Domain.Factories;
+using RoadmApp.Domain.IRepositories;
 using RoadmApp.Infrastructure.Data;
 
 namespace RoadmApp.Infrastructure.Repositories
@@ -19,19 +21,20 @@ namespace RoadmApp.Infrastructure.Repositories
         {
             try
             {
-                return await _context.Users.FirstOrDefaultAsync(u => u.Nickname == nick);
+                var userEntity = await _context.Users.Include(u => u.Contacts).FirstOrDefaultAsync(u => u.Nickname == nick);
+                return userEntity != null ? ModelFactory.CreateUserBusiness(userEntity) : null;
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.ToString());
             }
         }
-
-        public async Task<User> GetByIdAsync(int id)
+        public async Task<string?> GetHash(string nick)
         {
             try
             {
-                return await _context.Set<User>().FindAsync(id);
+                UserEntity userEntity = await _context.Users.FirstOrDefaultAsync(u => u.Nickname == nick);
+                return userEntity?.PasswordHash;
             }
             catch (Exception ex)
             {
@@ -39,18 +42,56 @@ namespace RoadmApp.Infrastructure.Repositories
             }
         }
 
-        public async Task<User> AddAsync(User user)
+        public async Task<User?> GetByIdAsync(int id)
+        {
+            try
+            {
+                var userEntity = await _context.Set<UserEntity>().Include(u => u.Contacts).FirstOrDefaultAsync(u => u.UserId == id);
+                return userEntity != null ? ModelFactory.CreateUserBusiness(userEntity) : null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
+        }
+        public async Task<List<User>> GetAllAsync()
+        {
+            try
+            {
+                var userEntities = await _context.Users.Include(u => u.Contacts).ToListAsync();
+                return userEntities.Select(ModelFactory.CreateUserBusiness).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
+        }
+        public async Task<User?> AddAsync(UserEntity user)
         {
             try
             {
                 await _context.Users.AddAsync(user);
                 await _context.SaveChangesAsync();
-                return user;
+                return ModelFactory.CreateUserBusiness(user);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.ToString());
             }
+        }
+        public async Task<User?> UpdatePasswordAsync(UserEntity? entity)
+        {
+            UserEntity dataEntity = await _context.Set<UserEntity>().Include(u => u.Contacts).FirstOrDefaultAsync(u => u.UserId == entity.UserId);
+
+            if (dataEntity != null)
+            {
+                dataEntity.SetPassword(entity.PasswordHash);
+
+                _context.Users.Update(dataEntity);
+                await _context.SaveChangesAsync();
+            }
+            return ModelFactory.CreateUserBusiness(entity);
+
         }
     }
 }
