@@ -3,6 +3,7 @@ using RoadmApp.Api.PresentationModels.Results;
 using RoadmApp.Application.IServices;
 using RoadmApp.Application.Responses;
 using RoadmApp.Application.UseCases.Access.CreateAccess;
+using RoadmApp.Application.UseCases.DTOs;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace RoadmApp.Api.Controllers
@@ -11,11 +12,13 @@ namespace RoadmApp.Api.Controllers
     [Route("api/[controller]")]
     public class AccessController : ControllerBase
     {
-        private readonly ICreateAccessUseCase _accessService;
+        private readonly ICreateAccessUseCase _createAccessAplication;
+        private readonly IFirstAccessUseCase _firstAccessAplication;
 
-        public AccessController(ICreateAccessUseCase accessService)
+        public AccessController(ICreateAccessUseCase createAccessService, IFirstAccessUseCase firstAccessService)
         {
-            _accessService = accessService;
+            _createAccessAplication = createAccessService;
+            _firstAccessAplication = firstAccessService;
         }
 
         /// <summary>
@@ -32,7 +35,7 @@ namespace RoadmApp.Api.Controllers
         {
             try
             {
-                SuccessModel data = await _accessService.CreateAccess(dto.Transform());
+                SuccessModel data = await _createAccessAplication.CreateAccess(dto.Transform());
 
                 if (!data.Success)
                     return BadRequest(new SuccessResults().Transform(data));
@@ -42,6 +45,20 @@ namespace RoadmApp.Api.Controllers
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpPost("first-access")]
+        public async Task<IActionResult> FirstAccess(FirstAccessLoginDto dto)
+        {
+            try
+            {
+                SuccessModel token = await _firstAccessAplication.FirstAccess(dto.Transform());
+                return Ok(new { token = new SuccessResults().Transform(token) });
+            }
+            catch (Exception ex)
+            {
+                return Unauthorized(ex.ToString());
             }
         }
     }

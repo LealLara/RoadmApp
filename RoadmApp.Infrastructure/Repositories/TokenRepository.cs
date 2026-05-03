@@ -17,9 +17,9 @@ namespace RoadmApp.Infrastructure.Repositories
             _key = config["Jwt:Key"] ?? throw new ArgumentNullException("Jwt:Key");
         }
 
-        public Task<string> GenerateToken(int userId)
+        public Task<string> GenerateToken(string hash)
         {
-            Claim[] claims = new[] { new Claim(ClaimTypes.NameIdentifier, userId.ToString()) };
+            Claim[] claims = new[] { new Claim(ClaimTypes.NameIdentifier, hash) };
 
             SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(_key));
             SigningCredentials creds = new(key, SecurityAlgorithms.HmacSha256);

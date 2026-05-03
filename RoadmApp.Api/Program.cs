@@ -4,7 +4,9 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using RoadmApp.Application.IServices;
 using RoadmApp.Application.Services;
+using RoadmApp.Application.UseCases.Access;
 using RoadmApp.Application.UseCases.Access.CreateAccess;
+using RoadmApp.Application.UseCases.Access.FirstAccess;
 using RoadmApp.Domain.IRepositories;
 using RoadmApp.Domain.Services;
 using RoadmApp.Infrastructure.Data;
@@ -60,19 +62,28 @@ try
 
     var key = Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]);
 
+    #region Services 
+
     builder.Services.AddScoped<ILogService, LogService>();
     builder.Services.AddScoped<IAuthService, AuthService>();
-    builder.Services.AddScoped<ITokenService, TokenService>();
     builder.Services.AddScoped<IEmailService, EmailService>();
-    builder.Services.AddScoped<ILogRepository, LogRepository>();
-    builder.Services.AddScoped<IUserRepository, UserRepository>();
-    builder.Services.AddScoped<IEmailRepository, EmailRepository>();
-    builder.Services.AddScoped<ITokenRepository, TokenRepository>();
-    builder.Services.AddScoped<IAccessRepository, AccessRepository>();
-    builder.Services.AddScoped<IContactRepository, ContactRepository>();
+    builder.Services.AddScoped<ITokenService, TokenService>();
+    builder.Services.AddScoped<IFirstAccessUseCase, FirstAccessUseCase>();
     builder.Services.AddScoped<ICreateAccessUseCase, CreateAccessUseCase>();
     builder.Services.AddScoped<IPasswordResetService, PasswordResetService>();
+    #endregion
+
+    #region  Repositories 
+
+    builder.Services.AddScoped<ILogRepository, LogRepository>();
+    builder.Services.AddScoped<IUserRepository, UserRepository>();
+    builder.Services.AddScoped<ITokenRepository, TokenRepository>();
+    builder.Services.AddScoped<IEmailRepository, EmailRepository>();
+    builder.Services.AddScoped<IAccessRepository, AccessRepository>();
+    builder.Services.AddScoped<IContactRepository, ContactRepository>();
     builder.Services.AddScoped<IPasswordResetRepository, PasswordResetRepository>();
+    #endregion
+
 
     builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         .AddJwtBearer(options =>

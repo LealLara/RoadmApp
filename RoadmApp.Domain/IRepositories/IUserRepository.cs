@@ -5,8 +5,12 @@ namespace RoadmApp.Domain.IRepositories
 {
     public interface IUserRepository
     {
-        Task<User?> GetByNicknameAsync(string email);
+        Task<User?> GetByNicknameAsync(string nickname);
         Task<User?> AddAsync(UserEntity user);
         Task<User?> GetByIdAsync(int id);
+        Task<string?> GetHash(string nickname);
+        Task<List<User>> GetAllAsync();
+
+       // Task<User?> UpdateAsync(UserEntity user);
     }
 }

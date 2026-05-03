@@ -2,6 +2,7 @@
 using RoadmApp.Domain.BusinessModel;
 using RoadmApp.Domain.Entities;
 using RoadmApp.Domain.IRepositories;
+using RoadmApp.Domain.Utils.Contants;
 using RoadmApp.Domain.Utils.Enums;
 using RoadmApp.Domain.Utils.StringTools;
 using RoadmApp.Domain.Utils.Templates;
@@ -36,6 +37,23 @@ namespace RoadmApp.Domain.Services
             return types;
         }
 
+        public  async Task<string> BildEmailBody(EEmailType type)
+        {
+            switch (type)
+            {
+                case EEmailType.Welcome:
+                    return EmailTemplates.GetTemplate(EEmailType.Welcome);
+                case EEmailType.FirstRegister:
+                    return EmailTemplates.GetTemplate(EEmailType.FirstRegister);
+                case EEmailType.PasswordReset:
+                    return EmailTemplates.GetTemplate(EEmailType.PasswordReset);
+                case EEmailType.BloomingLove:
+                    return EmailTemplates.GetTemplate(EEmailType.BloomingLove);
+                default:
+                    return string.Empty;
+            } 
+        }
+
         public async Task SendAsync(Email data)
         {
             EmailEntity emailBody = new();
@@ -47,5 +65,23 @@ namespace RoadmApp.Domain.Services
 
             await _emailRepository.SendAsync(emailBody);
         }
+
+        public async Task<Success> EmailAlreadyExists(Contact? existing)
+        {
+            Success successResult = new();
+
+            if (existing is not null)
+            {
+                successResult = new()
+                {
+                    SuccessFlag = false,
+                    Message = Messages.EmailAlreadyRegistered
+                };
+            }
+
+            return successResult;
+        }
+
+
     }
 }

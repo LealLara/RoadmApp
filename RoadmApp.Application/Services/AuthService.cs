@@ -2,6 +2,7 @@
 using RoadmApp.Domain.BusinessModel;
 using RoadmApp.Domain.Entities;
 using RoadmApp.Domain.IRepositories;
+using RoadmApp.Domain.Utils.Contants;
 using RoadmApp.Domain.Utils.Enums;
 
 namespace RoadmApp.Domain.Services
@@ -19,24 +20,34 @@ namespace RoadmApp.Domain.Services
         }
         public async Task<Success> Login(string nick, string password)
         {
-            var user = await _userRepository.GetByNicknameAsync(nick);
+            User? user = await _userRepository.GetByNicknameAsync(nick);
+            if (user == null)
+            {
+                return new Success(
+                successFlag: false,
+                message: Messages.UserNotFound,
+                logId: 0,
+                data: new List<object>()
+            );
+            }
+            string hash = await _userRepository.GetHash(nick);
 
-            if (user == null || !BCrypt.Net.BCrypt.Verify(password, user.PasswordHash))
-                throw new Exception("Credenciais inválidas");
+            if (hash == null || !BCrypt.Net.BCrypt.Verify(password, hash))
+                throw new Exception(Messages.InvalidCredentials);
 
-            string token = await _tokenService.GenerateToken(user.UserId);
+            string token = await _tokenService.GenerateToken(hash);
 
             if (string.IsNullOrEmpty(token))
-                throw new Exception("Erro ao gerar token");
+                throw new Exception(Messages.TokenGenerationError);
 
-            LogEntity logBody = new(logMessage: $"Usuário logou no sistema: {user.Nickname}",
+            LogEntity logBody = new(logMessage: $"{Messages.UserLoggedIn} {nick}",
                          logTypeId: (int)ELogType.Login,
                          userId: user.UserId
             );
 
             Log? log = await _logRepository.AddLog(logBody);
 
-            return new Success(true, "Login efetuado com sucesso", log.LogId, new List<object> { token });
+            return new Success(true, $"{Messages.UserLoggedIn} {nick}", log.LogId, new List<object> { token });
         }
     }
 }

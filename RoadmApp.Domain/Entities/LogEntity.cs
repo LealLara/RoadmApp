@@ -13,14 +13,14 @@ namespace RoadmApp.Domain.Entities
         public DateTime CreatedAt { get; private set; }
 
         public LogEntity() { }
-        public LogEntity(string logMessage, int logTypeId, int userId, DateTime createdAt) : this()
+        public LogEntity(string logMessage, int logTypeId, int userId, DateTime createdAt ) : this()
         {
             LogMessage = logMessage;
             LogTypeId = logTypeId;
             UserId = userId;
             CreatedAt = createdAt;
         }
-        public LogEntity(int logId, string logMessage, int logTypeId, int userId, DateTime createdAt) : this()
+        public LogEntity(int logId, string logMessage, int logTypeId, int userId, DateTime createdAt ) : this()
         {
             LogId = logId;
             LogMessage = logMessage;
@@ -40,6 +40,14 @@ namespace RoadmApp.Domain.Entities
             return new(
                 logMessage: $"Novo usuário criado: {createdUser}",
                 logTypeId: (int)ELogType.Creation,
+                userId: userId
+           );
+        }
+        public LogEntity FirstAccessLogAndTransform(string createdUser, int userId)
+        {
+            return new(
+                logMessage: $"Primeiro acesso do usuário: {createdUser}",
+                logTypeId: (int)ELogType.FirstAccess,
                 userId: userId
            );
         }

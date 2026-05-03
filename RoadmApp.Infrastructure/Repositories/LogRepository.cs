@@ -20,12 +20,12 @@ namespace RoadmApp.Infrastructure.Repositories
         {
             await _context.Logs.AddAsync(log);
             await _context.SaveChangesAsync();
-            return ModelFactory.CreateLogModel(log);
+            return ModelFactory.CreateLogBusiness(log);
         }
         public async Task<List<Log>> GetLogs()
         {
             var logEntities = await _context.Logs.ToListAsync();
-            return logEntities.Select(ModelFactory.CreateLogModel).ToList();
+            return logEntities.Select(ModelFactory.CreateLogBusiness).ToList();
         }
     }
 }

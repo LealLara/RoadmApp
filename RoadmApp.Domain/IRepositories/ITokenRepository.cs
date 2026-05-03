@@ -2,6 +2,6 @@
 {
     public interface ITokenRepository
     {
-        Task<string> GenerateToken(int userId);
+        Task<string> GenerateToken(string hash);
     }
 }

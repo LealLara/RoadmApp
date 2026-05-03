@@ -21,7 +21,7 @@ namespace RoadmApp.Api.Controllers
         {
             try
             {
-                Success token = await _authService.Login(dto.Login, dto.Password);
+                Success token = await _authService.Login(dto.Nickname, dto.Password);
                 // return Ok(new { token = new SuccessModel().Transform(token) });
                 return Ok(token);
             }

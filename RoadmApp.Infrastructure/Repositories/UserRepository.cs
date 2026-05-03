@@ -21,8 +21,20 @@ namespace RoadmApp.Infrastructure.Repositories
         {
             try
             {
-                var userEntity = await _context.Users.FirstOrDefaultAsync(u => u.Nickname == nick);
-                return userEntity != null ? ModelFactory.CreateUserModel(userEntity) : null;
+                var userEntity = await _context.Users.Include(u => u.Contacts).FirstOrDefaultAsync(u => u.Nickname == nick);
+                return userEntity != null ? ModelFactory.CreateUserBusiness(userEntity) : null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
+        }
+        public async Task<string?> GetHash(string nick)
+        {
+            try
+            {
+                UserEntity userEntity = await _context.Users.FirstOrDefaultAsync(u => u.Nickname == nick);
+                return userEntity?.PasswordHash;
             }
             catch (Exception ex)
             {
@@ -34,22 +46,33 @@ namespace RoadmApp.Infrastructure.Repositories
         {
             try
             {
-                var userEntity = await _context.Set<UserEntity>().FindAsync(id);
-                return userEntity != null ? ModelFactory.CreateUserModel(userEntity) : null;
+                var userEntity = await _context.Set<UserEntity>().Include(u => u.Contacts).FirstOrDefaultAsync(u => u.UserId == id);
+                return userEntity != null ? ModelFactory.CreateUserBusiness(userEntity) : null;
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.ToString());
             }
         }
-
+        public async Task< List<User>> GetAllAsync()
+        {
+            try
+            {
+                var userEntities = await _context.Users.Include(u => u.Contacts).ToListAsync();
+                return userEntities.Select(ModelFactory.CreateUserBusiness).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
+        }
         public async Task<User?> AddAsync(UserEntity user)
         {
             try
             {
                 await _context.Users.AddAsync(user);
                 await _context.SaveChangesAsync();
-                return ModelFactory.CreateUserModel(user);
+                return ModelFactory.CreateUserBusiness(user);
             }
             catch (Exception ex)
             {

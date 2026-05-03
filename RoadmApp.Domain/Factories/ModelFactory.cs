@@ -5,7 +5,7 @@ namespace RoadmApp.Domain.Factories
 {
     public static class ModelFactory
     {
-        public static Log CreateLogModel(LogEntity logEntity)
+        public static Log CreateLogBusiness(LogEntity logEntity)
         {
             return new Log(
 
@@ -28,7 +28,7 @@ namespace RoadmApp.Domain.Factories
         }
         public static UserEntity CreateUserEntity(Register register)
         {
-            return new (
+            return new(
                 username: register.User.Name,
                 nickname: register.Access.Nickname,
                 passwordHash: register.Access.Password,
@@ -37,7 +37,7 @@ namespace RoadmApp.Domain.Factories
             );
         }
 
-        public static User CreateUserModel(UserEntity entity)
+        public static User CreateUserBusiness(UserEntity entity)
         {
             if (entity == null)
                 return null;
@@ -49,7 +49,20 @@ namespace RoadmApp.Domain.Factories
                 birthday: entity.Birthday
             );
         }
-        public static List<Contact> CreateContactListModel(IList<ContactEntity> entities)
+        public static User CreateLoginBusiness(UserEntity entity)
+        {
+            if (entity == null)
+                return null;
+
+            return new(
+                userId: entity.UserId,
+                nickname: entity.Nickname,
+                passwordHash: entity.PasswordHash,
+                name: entity.Name,
+                birthday: entity.Birthday
+            );
+        }
+        public static List<Contact> CreateContactListBusiness(IList<ContactEntity> entities)
         {
             if (entities == null)
                 return null;
@@ -64,7 +77,7 @@ namespace RoadmApp.Domain.Factories
                 ))
             );
         }
-        public static Contact CreateContactModel(ContactEntity entity)
+        public static Contact CreateContactBusiness(ContactEntity entity)
         {
             if (entity == null)
                 return null;
@@ -75,6 +88,21 @@ namespace RoadmApp.Domain.Factories
                     cellphone: entity.Cellphone,
                     flagWhatsApp: entity.FlagWhatsApp,
                     userId: entity.UserId
+            );
+        }
+        public static Access CreateAccessBusiness(AccessEntity entity)
+        {
+            if (entity == null)
+                return null;
+
+            return new(
+                   accessId: entity.AccessId,
+                   nickname: entity.Nickname,
+                   password: entity.Password,
+                   isBlocked: entity.IsBlocked,
+                   userId: entity.UserId,
+                   createdAt: entity.CreatedAt,
+                   updatedAt: entity.UpdatedAt
             );
         }
     }

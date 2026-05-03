@@ -10,9 +10,9 @@ namespace RoadmApp.Application.Services
         {
             _tokenRepository = tokenRepository;
         }
-        public Task<string> GenerateToken(int userId)
+        public Task<string> GenerateToken(string hash)
         {
-            return _tokenRepository.GenerateToken(userId);
+            return _tokenRepository.GenerateToken(hash);
         }
     }
 }

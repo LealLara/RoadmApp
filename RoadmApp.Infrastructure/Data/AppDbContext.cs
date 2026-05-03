@@ -8,6 +8,7 @@ namespace RoadmApp.Infrastructure.Data
         public DbSet<UserEntity> Users => Set<UserEntity>();
         public DbSet<ContactEntity> Contacts => Set<ContactEntity>();
         public DbSet<LogEntity> Logs => Set<LogEntity>();
+        public DbSet<AccessEntity> Accesses => Set<AccessEntity>();
         public DbSet<LogTypeEntity> LogTypes => Set<LogTypeEntity>();
 
         public AppDbContext(DbContextOptions<AppDbContext> options)

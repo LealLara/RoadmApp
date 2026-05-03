@@ -21,7 +21,7 @@ namespace RoadmApp.Infrastructure.Repositories
             try
             {
                 ContactEntity contactt = await _context.Contacts.FirstOrDefaultAsync(u => u.Email == email);
-                return contactt != null ? ModelFactory.CreateContactModel(contactt) : null;
+                return contactt != null ? ModelFactory.CreateContactBusiness(contactt) : null;
             }
             catch (Exception ex)
             {
@@ -35,7 +35,7 @@ namespace RoadmApp.Infrastructure.Repositories
             {
                 await _context.Contacts.AddRangeAsync(contacts);
                 await _context.SaveChangesAsync();
-                return ModelFactory.CreateContactListModel(contacts.ToList());
+                return ModelFactory.CreateContactListBusiness(contacts.ToList());
             }
             catch (Exception ex)
             {
@@ -48,7 +48,7 @@ namespace RoadmApp.Infrastructure.Repositories
             {
                 await _context.Contacts.AddAsync(contact);
                 await _context.SaveChangesAsync();
-                return ModelFactory.CreateContactModel(contact);
+                return ModelFactory.CreateContactBusiness(contact);
             }
             catch (Exception ex)
             {
@@ -56,12 +56,12 @@ namespace RoadmApp.Infrastructure.Repositories
             }
         }
 
-        public List<Contact> GetContactbyUserId(int userId)
+        public async Task<List<Contact>> GetContactbyUserId(int userId)
         {
             try
             {
-                var contacts = _context.Contacts.Where(c => c.UserId == userId).ToList();
-                return ModelFactory.CreateContactListModel(contacts);
+                var contacts = await _context.Contacts.Where(c => c.UserId == userId).ToListAsync();
+                return ModelFactory.CreateContactListBusiness(contacts);
             }
             catch (Exception ex)
             {

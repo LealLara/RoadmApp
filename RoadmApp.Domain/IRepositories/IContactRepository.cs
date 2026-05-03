@@ -7,7 +7,7 @@ namespace RoadmApp.Domain.IRepositories
     {
         Task<Contact> AddAsync(ContactEntity contact);
         Task<List<Contact>> AddRangeAsync(IEnumerable<ContactEntity> contacts);
-        List<Contact> GetContactbyUserId(int userId);
+        Task<List<Contact>> GetContactbyUserId(int userId);
         Task<Contact?> GetByEmailAsync(string email);
     }
 }
