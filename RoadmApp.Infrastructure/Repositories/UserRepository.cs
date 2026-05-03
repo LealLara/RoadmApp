@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RoadmApp.Domain.BusinessModel;
 using RoadmApp.Domain.Entities;
 using RoadmApp.Domain.Factories;
-using RoadmApp.Domain.BusinessModel;
-using RoadmApp.Infrastructure.Data;
 using RoadmApp.Domain.IRepositories;
+using RoadmApp.Infrastructure.Data;
 
 namespace RoadmApp.Infrastructure.Repositories
 {
@@ -41,7 +41,7 @@ namespace RoadmApp.Infrastructure.Repositories
                 throw new Exception(ex.ToString());
             }
         }
-        
+
         public async Task<User?> GetByIdAsync(int id)
         {
             try
@@ -54,7 +54,7 @@ namespace RoadmApp.Infrastructure.Repositories
                 throw new Exception(ex.ToString());
             }
         }
-        public async Task< List<User>> GetAllAsync()
+        public async Task<List<User>> GetAllAsync()
         {
             try
             {
@@ -78,6 +78,20 @@ namespace RoadmApp.Infrastructure.Repositories
             {
                 throw new Exception(ex.ToString());
             }
+        }
+        public async Task<User?> UpdatePasswordAsync(UserEntity? entity)
+        {
+            UserEntity dataEntity = await _context.Set<UserEntity>().Include(u => u.Contacts).FirstOrDefaultAsync(u => u.UserId == entity.UserId);
+
+            if (dataEntity != null)
+            {
+                dataEntity.SetPassword(entity.PasswordHash);
+
+                _context.Users.Update(dataEntity);
+                await _context.SaveChangesAsync();
+            }
+            return ModelFactory.CreateUserBusiness(entity);
+
         }
     }
 }

@@ -89,5 +89,14 @@ namespace RoadmApp.Domain.Entities
                 birthday: register.User.Birthday
             );
         }
+        public UserEntity TransformToUserEntity(User register)
+        {
+            return new(
+                username: register.Name,
+                nickname: register.Nickname,
+                passwordHash: register.PasswordHash,
+                birthday: register.Birthday
+            );
+        }
     }
 }

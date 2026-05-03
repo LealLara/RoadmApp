@@ -8,7 +8,7 @@ using RoadmApp.Domain.IRepositories;
 using RoadmApp.Domain.Utils.Contants;
 using RoadmApp.Domain.Utils.Enums;
 using RoadmApp.Domain.Utils.StringTools;
-using RoadmApp.Domain.Validations;
+using RoadmApp.Domain.Validations; 
 
 namespace RoadmApp.Application.UseCases.Access.FirstAccess
 {
@@ -42,6 +42,7 @@ namespace RoadmApp.Application.UseCases.Access.FirstAccess
             valid.ValidateAndThrow(login.ToBusiness());
 
             User? nick = await _userRepository.GetByNicknameAsync(login.Nickname);
+            string hash = await _userRepository.GetHash(login.Nickname);
 
             if (nick == null)
             {
@@ -53,10 +54,15 @@ namespace RoadmApp.Application.UseCases.Access.FirstAccess
                     );
             }
 
-            if (nick.PasswordHash == null || !BCrypt.Net.BCrypt.Verify(nick.PasswordHash, PatternAccountConfig.PatternFirstRegister))
+            if (hash == null || !BCrypt.Net.BCrypt.Verify(PatternAccountConfig.PatternFirstRegister, hash))
                 throw new Exception(Messages.InvalidPatternPassword);
 
             nick.SetPassword(login.NewPassword);
+
+
+            var updatedPassword = await _userRepository.UpdatePasswordAsync(new UserEntity().TransformToUserEntity(nick));
+            if(updatedPassword == null)
+                throw new Exception(Messages.ErrorUpdatingPassword);
 
             AccessModel access = new(
                 nickname: login.Nickname,
@@ -81,10 +87,9 @@ namespace RoadmApp.Application.UseCases.Access.FirstAccess
             }
             logBody = await _logRepository.AddLog(new LogEntity().FirstAccessLogAndTransform(nick.Nickname, nick.UserId));
 
-            successResult = new(success: true, message: "Acesso atualizado.", logId: logBody.LogId, data: new List<object>() { accessResult });
+            successResult = new(success: true, message: Messages.UserCreatedSuccessfully, logId: logBody.LogId, data: new List<object>() { accessResult });
 
             return successResult;
-
         }
     }
 }

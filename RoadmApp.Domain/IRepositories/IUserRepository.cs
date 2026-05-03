@@ -10,6 +10,8 @@ namespace RoadmApp.Domain.IRepositories
         Task<User?> GetByIdAsync(int id);
         Task<string?> GetHash(string nickname);
         Task<List<User>> GetAllAsync();
+        Task<User?> UpdatePasswordAsync(UserEntity? entity);
+
 
        // Task<User?> UpdateAsync(UserEntity user);
     }
